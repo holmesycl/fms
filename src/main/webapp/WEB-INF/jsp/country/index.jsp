@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>国家列表（测试界面）</title>
-    <script src="${pageContext.request.contextPath}/static/js/jquery-1.11.1.min.js"></script>
+    <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
     <link href="${pageContext.request.contextPath}/static/css/style.css" rel="stylesheet" type="text/css"/>
     <style type="text/css">
         .pageDetail {
