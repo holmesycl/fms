@@ -17,13 +17,33 @@
       <script src="${pageContext.request.contextPath}/static/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="${pageContext.request.contextPath}/static/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/bootstrap/easyui.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/icon.css">
+
   </head>
   <body>
-    <h1>你好，世界！</h1>
+  
+	<nav class="navbar navbar-inverse" style="border-radius: 0">
+	
+	</nav>
+	
+	<div id="cc" class="easyui-layout" style="width: 100%;margin-top: -20px;">
+	    <div data-options="region:'west',title:'菜单',split:true" style="width:15%;"></div>
+	    <div data-options="region:'center',title:''" style="padding:5px;background:#eee;"></div>
+	</div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="${pageContext.request.contextPath}/static/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/locale/easyui-lang-zh_CN.js"></script>
+ 	
+ 	<script type="text/javascript">
+	 	var height = $(window).height()
+	 	var navHeight = $('nav').height()
+	 	$('#cc').height(height - navHeight - 5);
+ 	</script>
+ 
   </body>
 </html>
