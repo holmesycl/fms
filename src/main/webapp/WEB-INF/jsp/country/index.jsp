@@ -1,165 +1,56 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>国家列表（测试界面）</title>
-    <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
-    <link href="${pageContext.request.contextPath}/static/css/style.css" rel="stylesheet" type="text/css"/>
-    <style type="text/css">
-        .pageDetail {
-            display: none;
-        }
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>理财管理系统</title>
 
-        .show {
-            display: table-row;
-        }
-    </style>
-    <script>
-        $(function () {
-            $('#list').click(function () {
-                $('.pageDetail').toggleClass('show');
-            });
-        });
+    <!-- Bootstrap -->
+    <link href="${pageContext.request.contextPath}/static/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
-    </script>
-</head>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="${pageContext.request.contextPath}/static/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="${pageContext.request.contextPath}/static/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/bootstrap/easyui.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/icon.css">
+
+  </head>
 <body>
-<div class="wrapper">
-    <div class="middle">
-        <h1 style="padding: 50px 0 20px;">国家(地区)列表</h1>
 
-        <form action="${pageContext.request.contextPath}/country/list" method="post">
-            <table class="gridtable" style="width:100%;">
-                <tr>
-                    <th>国家(地区)名称：</th>
-                    <td><input type="text" name="countryname" value="${queryParam.countryname}"/></td>
-                    <th>国家(地区)代码：</th>
-                    <td><input type="text" name="countrycode" value="${queryParam.countrycode}"/></td>
-                    <td rowspan="2"><input type="submit" value="查询"/></td>
-                </tr>
-                <tr>
-                    <th>页码：</th>
-                    <td><input type="text" name="page" value="${page}"/></td>
-                    <th>页面大小：</th>
-                    <td><input type="text" name="rows" value="${rows}"/></td>
-                </tr>
-            </table>
-        </form>
-        <c:if test="${page!=null}">
-            <table class="gridtable" style="width:100%;">
-                <tr>
-                    <th colspan="2">分页信息 - [<a href="javascript:;" id="list">展开/收缩</a>]</th>
-                </tr>
-                <tr class="pageDetail">
-                    <th style="width: 300px;">当前页号</th>
-                    <td>${pageInfo.pageNum}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>页面大小</th>
-                    <td>${pageInfo.pageSize}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>起始行号(>=)</th>
-                    <td>${pageInfo.startRow}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>终止行号(<=)</th>
-                    <td>${pageInfo.endRow}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>总结果数</th>
-                    <td>${pageInfo.total}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>总页数</th>
-                    <td>${pageInfo.pages}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>第一页</th>
-                    <td>${pageInfo.firstPage}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>前一页</th>
-                    <td>${pageInfo.prePage}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>下一页</th>
-                    <td>${pageInfo.nextPage}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>最后一页</th>
-                    <td>${pageInfo.lastPage}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>是否为第一页</th>
-                    <td>${pageInfo.isFirstPage}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>是否为最后一页</th>
-                    <td>${pageInfo.isLastPage}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>是否有前一页</th>
-                    <td>${pageInfo.hasPreviousPage}</td>
-                </tr>
-                <tr class="pageDetail">
-                    <th>是否有下一页</th>
-                    <td>${pageInfo.hasNextPage}</td>
-                </tr>
-            </table>
-            <table class="gridtable" style="width:100%;">
-                <thead>
-                <tr>
-                    <th colspan="4">查询结果 - [<a href="${pageContext.request.contextPath}/country/view">新增国家(地区)</a>]</th>
-                </tr>
-                <tr>
-                    <th>ID</th>
-                    <th>国家(地区)名</th>
-                    <th>国家(地区)代码</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${pageInfo.list}" var="country">
-                    <tr>
-                        <td>${country.id}</td>
-                        <td>${country.countryname}</td>
-                        <td>${country.countrycode}</td>
-                        <td style="text-align:center;">[<a
-                                href="${pageContext.request.contextPath}/country/view?id=${country.id}">修改</a>] -
-                            [<a href="${pageContext.request.contextPath}/country/delete?id=${country.id}">删除</a>]
-                        </td>
-                    </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-            <table class="gridtable" style="width:100%;text-align: center;">
-                <tr>
-                    <c:if test="${pageInfo.hasPreviousPage}">
-                        <td>
-                            <a href="${pageContext.request.contextPath}/country/list?page=${pageInfo.prePage}&rows=${pageInfo.pageSize}&countryname=${queryParam.countryname}&countrycode=${queryParam.countrycode}">前一页</a>
-                        </td>
-                    </c:if>
-                    <c:forEach items="${pageInfo.navigatepageNums}" var="nav">
-                        <c:if test="${nav == pageInfo.pageNum}">
-                            <td style="font-weight: bold;">${nav}</td>
-                        </c:if>
-                        <c:if test="${nav != pageInfo.pageNum}">
-                            <td>
-                                <a href="${pageContext.request.contextPath}/country/list?page=${nav}&rows=${pageInfo.pageSize}&countryname=${queryParam.countryname}&countrycode=${queryParam.countrycode}">${nav}</a>
-                            </td>
-                        </c:if>
-                    </c:forEach>
-                    <c:if test="${pageInfo.hasNextPage}">
-                        <td>
-                            <a href="${pageContext.request.contextPath}/country/list?page=${pageInfo.nextPage}&rows=${pageInfo.pageSize}&countryname=${queryParam.countryname}&countrycode=${queryParam.countrycode}">下一页</a>
-                        </td>
-                    </c:if>
-                </tr>
-            </table>
-        </c:if>
-    </div>
-    <div class="push"></div>
+<div class="container" style="margin-top: 20px;">
+
+<table class="easyui-datagrid" style="width:400px;height:250px" data-options="
+url:'http://localhost:8080/fms/country/person/all/',
+fitColumns:true,
+singleSelect:true,
+loadMsg:'Processing, please wait …',
+pagination:true">
+    <thead>
+        <tr>
+            <th data-options="field:'id'">编号</th>
+            <th data-options="field:'name'">名字</th>
+            <th data-options="field:'age'">年龄</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
 </div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="${pageContext.request.contextPath}/static/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/locale/easyui-lang-zh_CN.js"></script>
+
 </body>
 </html>

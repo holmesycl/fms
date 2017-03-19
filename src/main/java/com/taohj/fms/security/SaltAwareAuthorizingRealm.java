@@ -1,4 +1,4 @@
-package com.taohj.fms.shiro.realm;
+package com.taohj.fms.security;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -7,7 +7,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
-public class FmsAuthorizingRealm extends AuthorizingRealm {
+public class SaltAwareAuthorizingRealm extends AuthorizingRealm{
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -20,6 +20,5 @@ public class FmsAuthorizingRealm extends AuthorizingRealm {
 		
 		return null;
 	}
-
 
 }

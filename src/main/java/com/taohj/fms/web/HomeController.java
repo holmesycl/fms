@@ -1,4 +1,4 @@
-package com.taohj.fms.controller;
+package com.taohj.fms.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
