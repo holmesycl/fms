@@ -3,29 +3,31 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-public class User {
+public class Permission {
     /**
-     * 用户ID
+     * 主键
      */
     @Id
-    @Column(name = "user_id")
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     /**
-     * 用户名
+     * 权限编码
      */
-    private String username;
+    @Column(name = "permission_code")
+    private String permissionCode;
 
     /**
-     * 电话号码
+     * 权限名称
      */
-    @Column(name = "phone_no")
-    private String phoneNo;
+    @Column(name = "permission_name")
+    private String permissionName;
 
     /**
-     * 密码
+     * 权限描述
      */
-    private String password;
+    @Column(name = "permission_desc")
+    private String permissionDesc;
 
     /**
      * 创建时间
@@ -62,75 +64,75 @@ public class User {
     private String remark;
 
     /**
-     * 获取用户ID
+     * 获取主键
      *
-     * @return user_id - 用户ID
+     * @return id - 主键
      */
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
     /**
-     * 设置用户ID
+     * 设置主键
      *
-     * @param userId 用户ID
+     * @param id 主键
      */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**
-     * 获取用户名
+     * 获取权限编码
      *
-     * @return username - 用户名
+     * @return permission_code - 权限编码
      */
-    public String getUsername() {
-        return username;
+    public String getPermissionCode() {
+        return permissionCode;
     }
 
     /**
-     * 设置用户名
+     * 设置权限编码
      *
-     * @param username 用户名
+     * @param permissionCode 权限编码
      */
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setPermissionCode(String permissionCode) {
+        this.permissionCode = permissionCode == null ? null : permissionCode.trim();
     }
 
     /**
-     * 获取电话号码
+     * 获取权限名称
      *
-     * @return phone_no - 电话号码
+     * @return permission_name - 权限名称
      */
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getPermissionName() {
+        return permissionName;
     }
 
     /**
-     * 设置电话号码
+     * 设置权限名称
      *
-     * @param phoneNo 电话号码
+     * @param permissionName 权限名称
      */
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo == null ? null : phoneNo.trim();
+    public void setPermissionName(String permissionName) {
+        this.permissionName = permissionName == null ? null : permissionName.trim();
     }
 
     /**
-     * 获取密码
+     * 获取权限描述
      *
-     * @return password - 密码
+     * @return permission_desc - 权限描述
      */
-    public String getPassword() {
-        return password;
+    public String getPermissionDesc() {
+        return permissionDesc;
     }
 
     /**
-     * 设置密码
+     * 设置权限描述
      *
-     * @param password 密码
+     * @param permissionDesc 权限描述
      */
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setPermissionDesc(String permissionDesc) {
+        this.permissionDesc = permissionDesc == null ? null : permissionDesc.trim();
     }
 
     /**

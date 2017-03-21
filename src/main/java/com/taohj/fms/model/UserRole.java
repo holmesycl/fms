@@ -3,13 +3,14 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-public class User {
+@Table(name = "user_role")
+public class UserRole {
     /**
-     * 用户ID
+     * 主键
      */
     @Id
-    @Column(name = "user_id")
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     /**
      * 用户名
@@ -17,15 +18,10 @@ public class User {
     private String username;
 
     /**
-     * 电话号码
+     * 角色编码
      */
-    @Column(name = "phone_no")
-    private String phoneNo;
-
-    /**
-     * 密码
-     */
-    private String password;
+    @Column(name = "role_code")
+    private String roleCode;
 
     /**
      * 创建时间
@@ -62,21 +58,21 @@ public class User {
     private String remark;
 
     /**
-     * 获取用户ID
+     * 获取主键
      *
-     * @return user_id - 用户ID
+     * @return id - 主键
      */
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
     /**
-     * 设置用户ID
+     * 设置主键
      *
-     * @param userId 用户ID
+     * @param id 主键
      */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**
@@ -98,39 +94,21 @@ public class User {
     }
 
     /**
-     * 获取电话号码
+     * 获取角色编码
      *
-     * @return phone_no - 电话号码
+     * @return role_code - 角色编码
      */
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getRoleCode() {
+        return roleCode;
     }
 
     /**
-     * 设置电话号码
+     * 设置角色编码
      *
-     * @param phoneNo 电话号码
+     * @param roleCode 角色编码
      */
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo == null ? null : phoneNo.trim();
-    }
-
-    /**
-     * 获取密码
-     *
-     * @return password - 密码
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * 设置密码
-     *
-     * @param password 密码
-     */
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode == null ? null : roleCode.trim();
     }
 
     /**

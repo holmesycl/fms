@@ -3,29 +3,31 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-public class User {
+public class Role {
     /**
-     * 用户ID
+     * 角色ID
      */
     @Id
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "role_id")
+    private Integer roleId;
 
     /**
-     * 用户名
+     * 角色编码
      */
-    private String username;
+    @Column(name = "role_code")
+    private String roleCode;
 
     /**
-     * 电话号码
+     * 角色名称
      */
-    @Column(name = "phone_no")
-    private String phoneNo;
+    @Column(name = "role_name")
+    private String roleName;
 
     /**
-     * 密码
+     * 角色描述
      */
-    private String password;
+    @Column(name = "role_desc")
+    private String roleDesc;
 
     /**
      * 创建时间
@@ -62,75 +64,75 @@ public class User {
     private String remark;
 
     /**
-     * 获取用户ID
+     * 获取角色ID
      *
-     * @return user_id - 用户ID
+     * @return role_id - 角色ID
      */
-    public Integer getUserId() {
-        return userId;
+    public Integer getRoleId() {
+        return roleId;
     }
 
     /**
-     * 设置用户ID
+     * 设置角色ID
      *
-     * @param userId 用户ID
+     * @param roleId 角色ID
      */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 
     /**
-     * 获取用户名
+     * 获取角色编码
      *
-     * @return username - 用户名
+     * @return role_code - 角色编码
      */
-    public String getUsername() {
-        return username;
+    public String getRoleCode() {
+        return roleCode;
     }
 
     /**
-     * 设置用户名
+     * 设置角色编码
      *
-     * @param username 用户名
+     * @param roleCode 角色编码
      */
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setRoleCode(String roleCode) {
+        this.roleCode = roleCode == null ? null : roleCode.trim();
     }
 
     /**
-     * 获取电话号码
+     * 获取角色名称
      *
-     * @return phone_no - 电话号码
+     * @return role_name - 角色名称
      */
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getRoleName() {
+        return roleName;
     }
 
     /**
-     * 设置电话号码
+     * 设置角色名称
      *
-     * @param phoneNo 电话号码
+     * @param roleName 角色名称
      */
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo == null ? null : phoneNo.trim();
+    public void setRoleName(String roleName) {
+        this.roleName = roleName == null ? null : roleName.trim();
     }
 
     /**
-     * 获取密码
+     * 获取角色描述
      *
-     * @return password - 密码
+     * @return role_desc - 角色描述
      */
-    public String getPassword() {
-        return password;
+    public String getRoleDesc() {
+        return roleDesc;
     }
 
     /**
-     * 设置密码
+     * 设置角色描述
      *
-     * @param password 密码
+     * @param roleDesc 角色描述
      */
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setRoleDesc(String roleDesc) {
+        this.roleDesc = roleDesc == null ? null : roleDesc.trim();
     }
 
     /**
