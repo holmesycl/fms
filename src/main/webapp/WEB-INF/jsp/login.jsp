@@ -20,7 +20,14 @@
   </head>
   <body>
     <h1>这是一个登录界面</h1>
-
+	<div class="contaier">
+		<form action="${pageContext.request.contextPath}/s/login" method="post">
+			<input name="username">
+			<input name="password">
+			<input type="checkbox" name="rememberMe" value="true">
+			<button type="submit">登陆</button>
+		</form>
+	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

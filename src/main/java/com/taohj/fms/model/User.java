@@ -19,8 +19,13 @@ public class User {
     /**
      * 电话号码
      */
-    @Column(name = "phone_no")
-    private String phoneNo;
+    @Column(name = "phone_num")
+    private String phoneNum;
+
+    /**
+     * 用户邮箱
+     */
+    private String email;
 
     /**
      * 密码
@@ -100,19 +105,37 @@ public class User {
     /**
      * 获取电话号码
      *
-     * @return phone_no - 电话号码
+     * @return phone_num - 电话号码
      */
-    public String getPhoneNo() {
-        return phoneNo;
+    public String getPhoneNum() {
+        return phoneNum;
     }
 
     /**
      * 设置电话号码
      *
-     * @param phoneNo 电话号码
+     * @param phoneNum 电话号码
      */
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo = phoneNo == null ? null : phoneNo.trim();
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum == null ? null : phoneNum.trim();
+    }
+
+    /**
+     * 获取用户邮箱
+     *
+     * @return email - 用户邮箱
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * 设置用户邮箱
+     *
+     * @param email 用户邮箱
+     */
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 
     /**

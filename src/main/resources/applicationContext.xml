@@ -40,7 +40,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<array>
-				<value>classpath:mapper/*.xml</value>
+				<value>classpath:com/taohj/fms/mapper/*.xml</value>
 			</array>
 		</property>
 		<property name="typeAliasesPackage" value="com.taohj.fms.model" />
@@ -157,7 +157,7 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/s/login"/>
-        <property name="successUrl" value="/s/index"/>
+        <property name="successUrl" value="/index"/>
         <property name="unauthorizedUrl" value="/s/unauthorized"/>
         <!-- The 'filters' property is not necessary since any declared javax.servlet.Filter bean
              defined will be automatically acquired and available via its beanName in chain
@@ -171,6 +171,10 @@
         <property name="filterChainDefinitions">
             <value>
                 /favicon.ico = anon
+                <!-- 静态数据 -->
+                /static/** = anon
+                <!-- 注册模块 -->
+                /signup/** = anon
                 /s/login = anon
                 # everything else requires authentication:
                 /** = authc
