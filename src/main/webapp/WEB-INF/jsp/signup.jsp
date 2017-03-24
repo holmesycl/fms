@@ -29,34 +29,34 @@
 				<div class="panel panel-default">
 				  <div class="panel-heading">用户注册</div>
 				  <div class="panel-body">
-				    <form class="form-horizontal">
+				    <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/signup/save">
 				      <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">用户类型</label>
+					    <label for="radioNormal" class="col-sm-2 control-label">用户类型</label>
 					    <div class="col-sm-10">
 					      <label class="radio-inline">
-						    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 普通用户
+						    <input type="radio" name="userType" id="radioNormal" value="normal"> 普通用户
 						  </label>
 						  <label class="radio-inline">
-						    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 银行用户
+						    <input type="radio" name="userType" id="radioBank" value="bank"> 银行用户
 						  </label>
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
+					    <label for="inputEmail" class="col-sm-2 control-label">邮箱</label>
 					    <div class="col-sm-10">
-					      <input type="email" class="form-control" id="inputEmail3" placeholder="输入正确邮箱">
+					      <input type="email" class="form-control" id="inputEmail" placeholder="输入正确邮箱">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
+					    <label for="inputPassword" class="col-sm-2 control-label">密码</label>
 					    <div class="col-sm-10">
-					      <input type="password" class="form-control" id="inputPassword3" placeholder="输入登陆密码">
+					      <input type="password" class="form-control" name="password" id="inputPassword" placeholder="输入登陆密码">
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
+					    <label for="inputConfirmPassword" class="col-sm-2 control-label">确认密码</label>
 					    <div class="col-sm-10">
-					      <input type="password" class="form-control" id="inputPassword3" placeholder="确认登陆密码">
+					      <input type="password" class="form-control" name="confirmPassword" id="inputConfirmPassword" placeholder="确认登陆密码">
 					    </div>
 					  </div>
 					  <div class="form-group">
