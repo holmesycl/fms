@@ -82,8 +82,8 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 		criteria.andEqualTo("username", username);
 		criteria.andEqualTo("state", State.U.name());
 		Date cur = new Date();
-		criteria.andGreaterThanOrEqualTo("effective_date", cur);
-		criteria.andLessThanOrEqualTo("expire_date", cur);
+		criteria.andGreaterThanOrEqualTo("expire_date", cur);
+		criteria.andLessThanOrEqualTo("effective_date", cur);
 		List<User> users = selectByExample(example);
 		if (CollectionUtils.isEmpty(users)) {
 			return null;

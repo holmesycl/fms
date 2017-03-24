@@ -25,7 +25,7 @@
 			<div class="col-sm-10 col-sm-offset-1">
 				<div style="margin: 30px 0 30px 0;">
 					<div class="row" style="margin-bottom: -30px;">
-						<div><p class="lead text-muted" style="padding-left: 15px;display: inline-block;">用户注册</p><p class="pull-right" style="padding-right: 15px;display: inline-block;">我已注册，现在就<a class="text-primary" href="#">登陆</a></p></div>
+						<div><p class="lead text-muted" style="padding-left: 15px;display: inline-block;">用户注册</p><p class="pull-right" style="padding-right: 15px;display: inline-block;">我已注册，现在就<a class="text-primary" href="${pageContext.request.contextPath}/s/login">登陆</a></p></div>
 					</div>
 					<hr>
 				</div>
@@ -38,6 +38,9 @@
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
 				<div class="row">
+					<div class="col-sm-5">
+						<img src="${pageContext.request.contextPath}/static/img/signup1.jpg" alt="理财系统" class="img-responsive img-rounded">
+					</div>
 					<div class="col-sm-7">
 						<div class="panel panel-default">
 						  <!-- <div class="panel-heading">用户注册</div> -->
@@ -86,9 +89,6 @@
 							</form>
 						  </div>
 						</div>
-					</div>
-					<div class="col-sm-5">
-						<img src="${pageContext.request.contextPath}/static/img/signup.jpg" alt="理财系统" class="img-responsive img-rounded">
 					</div>
 				</div>
 			</div>
