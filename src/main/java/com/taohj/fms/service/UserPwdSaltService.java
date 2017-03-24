@@ -6,4 +6,6 @@ public interface UserPwdSaltService extends IService<UserPwdSalt> {
 
 	UserPwdSalt createUserPwdSalt(String username);
 
+	UserPwdSalt selectByUsername(String username);
+
 }

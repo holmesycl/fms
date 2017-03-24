@@ -9,8 +9,20 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.taohj.fms.model.User;
+import com.taohj.fms.model.UserPwdSalt;
+import com.taohj.fms.service.UserPwdSaltService;
+import com.taohj.fms.service.UserService;
 
 public class SaltAwareAuthorizingRealm extends AuthorizingRealm {
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private UserPwdSaltService userPwdSaltService;
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -22,10 +34,20 @@ public class SaltAwareAuthorizingRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		String username = token.getUsername();
-		String password = "L43lTuXVXrksx1pvTArLDPyqG0aC7RDTdBqmQJ2e++w=";
-		String salt = "1490093510324";
+		User user = userService.selectByUsername(username);
+		if (user == null) {
+			throw new AuthenticationException("用户不存在.");
+		}
+		String password = user.getPassword();
+
+		UserPwdSalt userPwdSalt = userPwdSaltService.selectByUsername(username);
+		if (userPwdSalt == null) {
+			throw new AuthenticationException("用户不存在.");
+		}
+		String salt = userPwdSalt.getSalt();
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, password, getName());
 		info.setCredentialsSalt(ByteSource.Util.bytes(salt));
+
 		return info;
 	}
 
