@@ -7,6 +7,8 @@ import com.taohj.fms.pagination.PageResult;
 public interface UserService extends IService<User> {
 
 	User saveUser(User user);
+	
+	User selectByUsername(String username);
 
 	PageResult<User> selectAll(User user, PageCondition pageCondition);
 
