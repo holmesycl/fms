@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>理财管理系统 登录界面</title>
+    <title>理财管理系统 用户登录</title>
 
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/static/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -19,14 +19,67 @@
     <![endif]-->
   </head>
   <body>
-    <h1>这是一个登录界面</h1>
-	<div class="contaier">
-		<form action="${pageContext.request.contextPath}/s/login" method="post">
-			<input name="username">
-			<input name="password">
-			<input type="checkbox" name="rememberMe" value="true">
-			<button type="submit">登陆</button>
-		</form>
+	<nav class="navbar navbar-default" style="border-radius: 0">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="${pageContext.request.contextPath}/home">理财系统</a>
+	    </div>
+	  </div><!-- /.container-fluid -->
+	</nav>
+
+	<div class="container" style="margin-top: 100px;">
+		<div class="row">
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="row">
+					<div class="col-sm-6">
+						<img src="${pageContext.request.contextPath}/static/img/signup.jpg" alt="理财系统" class="img-responsive img-rounded">
+					</div>
+					<div class="col-sm-6">
+						<div class="panel panel-default">
+						  <div class="panel-heading">用户密码登录</div>
+						  <div class="panel-body">
+							<form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/s/login">
+							  <div class="form-group">
+							    <label for="inputUsername" class="col-sm-2 control-label">用户名</label>
+							    <div class="col-sm-10">
+							      <input type="text" class="form-control" name="username" id="inputUsername" placeholder="输入用户名">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label for="inputPassword" class="col-sm-2 control-label">密码</label>
+							    <div class="col-sm-10">
+							      <input type="password" class="form-control" name="password" id="inputPassword" placeholder="输入登陆密码">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <div class="col-sm-offset-2 col-sm-10">
+							      <div class="checkbox">
+							        <label>
+							          <input type="checkbox"> 记住我
+							        </label>
+							      </div>
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <div class="col-sm-offset-2 col-sm-10">
+							      <button type="submit" class="btn btn-default">登录</button>
+							    </div>
+							  </div>
+							</form>
+							
+						  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>

@@ -38,9 +38,6 @@
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
 				<div class="row">
-					<div class="col-sm-5">
-						<img src="${pageContext.request.contextPath}/static/img/signup1.jpg" alt="理财系统" class="img-responsive img-rounded">
-					</div>
 					<div class="col-sm-7">
 						<div class="panel panel-default">
 						  <!-- <div class="panel-heading">用户注册</div> -->
@@ -50,7 +47,7 @@
 							    <label for="radioUserType" class="col-sm-2 control-label">用户类型</label>
 							    <div class="col-sm-10">
 							      <label class="radio-inline">
-								    <input type="radio" name="userType" checked="checked" id="radioUserType" value="1"> 普通用户
+								    <input type="radio" name="userType" checked="checked" id="radioUserType" value="1"> 理财用户
 								  </label>
 								  <label class="radio-inline">
 								    <input type="radio" name="userType" value="2"> 银行用户
@@ -89,6 +86,9 @@
 							</form>
 						  </div>
 						</div>
+					</div>
+					<div class="col-sm-5">
+						<img src="${pageContext.request.contextPath}/static/img/signup.jpg" alt="理财系统" class="img-responsive img-rounded">
 					</div>
 				</div>
 			</div>

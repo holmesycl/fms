@@ -23,7 +23,7 @@
   </head>
   <body>
   
-	<nav class="navbar navbar-inverse" style="border-radius: 0">
+	<nav class="navbar navbar-default" style="border-radius: 0">
 	
 	</nav>
 	

@@ -25,7 +25,7 @@ public class UserPwdSaltServiceImpl extends BaseService<UserPwdSalt> implements 
 		userPwdSalt.setUsername(username);
 		userPwdSalt.setSalt(SaltUtil.sysdateSalt());
 		userPwdSalt.setCreateDate(new Date());
-		userPwdSalt.setUsername(State.U.name());
+		userPwdSalt.setState(State.U.name());
 		this.save(userPwdSalt);
 		return userPwdSalt;
 	}
@@ -35,6 +35,7 @@ public class UserPwdSaltServiceImpl extends BaseService<UserPwdSalt> implements 
 		Example example = new Example(UserPwdSalt.class);
 		Criteria criteria = example.createCriteria();
 		criteria.andEqualTo("username", username);
+		criteria.andEqualTo("state", State.U.name());
 		List<UserPwdSalt> salts = selectByExample(example);
 		if (CollectionUtils.isEmpty(salts)) {
 			return null;
