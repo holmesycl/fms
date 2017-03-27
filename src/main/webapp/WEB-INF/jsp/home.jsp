@@ -28,8 +28,30 @@
 	</nav>
 	
 	<div id="cc" class="easyui-layout" style="width: 100%;margin-top: -20px;">
-	    <div data-options="region:'west',title:'菜单',split:true" style="width:15%;"></div>
-	    <div data-options="region:'center',title:''" style="padding:5px;background:#eee;"></div>
+	    <div data-options="region:'west',title:'菜单',split:true" style="width:15%;">
+	    	<div class="easyui-accordion" data-options="fit:true,border:false">
+				<div title="个人收藏" data-options="selected:true">
+					<div class="list-group">
+					  <a href="javascript:void(0)" onclick="addTab('jquery','http://jquery.com/')" class="list-group-item">jquery</a>
+					  <a href="javascript:void(0)" onclick="addTab('baidu','http://www.baidu.com/')" class="list-group-item">baidu</a>
+					  <a href="javascript:void(0)" onclick="addTab('easyui','http://jquery.com/')" class="list-group-item">easyui</a>
+					</div>
+				</div>
+				<div title="理财信息">
+					<div class="list-group">
+					  <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+					  <a href="#" class="list-group-item">Morbi leo risus</a>
+					  <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+					  <a href="#" class="list-group-item">Vestibulum at eros</a>
+					</div>
+				</div>
+			</div>
+	    </div>
+	    <div id="content" data-options="region:'center',title:''" style="padding:5px;background:#eee;">
+	    	<div id="tt" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+				<div title="About" data-options="href:'_content.html'" style="padding:10px"></div>
+			</div>
+	    </div>
 	</div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -43,6 +65,20 @@
 	 	var height = $(window).height()
 	 	var navHeight = $('nav').height()
 	 	$('#cc').height(height - navHeight - 5);
+	 	
+	 	function addTab(title, url){
+	 		if ($('#tt').tabs('exists', title)){
+	 			$('#tt').tabs('select', title);
+	 		} else {
+	 			var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
+	 			$('#tt').tabs('add',{
+	 				title:title,
+	 				content:content,
+	 				closable:true
+	 			});
+	 		}
+	 	}
+
  	</script>
  
   </body>
