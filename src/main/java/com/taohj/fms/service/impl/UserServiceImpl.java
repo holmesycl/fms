@@ -1,12 +1,10 @@
 package com.taohj.fms.service.impl;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.springframework.util.CollectionUtils;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -17,6 +15,7 @@ import com.taohj.fms.pagination.PageResult;
 import com.taohj.fms.pagination.SimplePageResult;
 import com.taohj.fms.service.UserPwdSaltService;
 import com.taohj.fms.service.UserService;
+import com.taohj.fms.util.EffectiveExample;
 import com.taohj.fms.util.PwdUtil;
 import com.taohj.fms.util.State;
 import com.taohj.fms.util.TimeUtil;
@@ -76,20 +75,16 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	}
 
 	@Override
-	public User selectByUsername(String username) {
-		Example example = new Example(User.class);
-		Criteria criteria = example.createCriteria();
-		criteria.andEqualTo("username", username);
-		criteria.andEqualTo("state", State.U.name());
-		Date cur = new Date();
-		criteria.andGreaterThanOrEqualTo("expireDate", cur);
-		criteria.andLessThanOrEqualTo("effectiveDate", cur);
-		List<User> users = selectByExample(example);
-		if (CollectionUtils.isEmpty(users)) {
-			return null;
-		}
-		Assert.state(users.size() == 1);
-		return users.get(0);
+	public User selectByUsername(final String username) {
+		Example example = new EffectiveExample(User.class) {
+
+			@Override
+			protected void fillCriteria(Criteria criteria) {
+				criteria.andEqualTo("username", username);
+
+			}
+		};
+		return selectOne(example);
 	}
 
 }

@@ -9,6 +9,7 @@
     <result column="permission_code" jdbcType="VARCHAR" property="permissionCode" />
     <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
     <result column="permission_desc" jdbcType="VARCHAR" property="permissionDesc" />
+    <result column="type" jdbcType="CHAR" property="type" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="last_modify_date" jdbcType="TIMESTAMP" property="lastModifyDate" />
     <result column="effective_date" jdbcType="TIMESTAMP" property="effectiveDate" />

@@ -3,7 +3,7 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-public class Permission {
+public class Menu {
     /**
      * 主键
      */
@@ -12,27 +12,31 @@ public class Permission {
     private Integer id;
 
     /**
-     * 权限编码
+     * 菜单编码
      */
-    @Column(name = "permission_code")
-    private String permissionCode;
+    @Column(name = "menu_code")
+    private String menuCode;
 
     /**
-     * 权限名称
+     * 菜单名称
      */
-    @Column(name = "permission_name")
-    private String permissionName;
+    @Column(name = "menu_name")
+    private String menuName;
 
     /**
-     * 权限描述
+     * 菜单标题
      */
-    @Column(name = "permission_desc")
-    private String permissionDesc;
+    private String title;
 
     /**
-     * 类型：1 - 操作，2 - 菜单
+     * 地址
      */
-    private String type;
+    private String url;
+
+    /**
+     * 类别
+     */
+    private String category;
 
     /**
      * 创建时间
@@ -64,9 +68,9 @@ public class Permission {
     private String state;
 
     /**
-     * 备注信息
+     * 备注
      */
-    private String remark;
+    private byte[] remark;
 
     /**
      * 获取主键
@@ -87,75 +91,93 @@ public class Permission {
     }
 
     /**
-     * 获取权限编码
+     * 获取菜单编码
      *
-     * @return permission_code - 权限编码
+     * @return menu_code - 菜单编码
      */
-    public String getPermissionCode() {
-        return permissionCode;
+    public String getMenuCode() {
+        return menuCode;
     }
 
     /**
-     * 设置权限编码
+     * 设置菜单编码
      *
-     * @param permissionCode 权限编码
+     * @param menuCode 菜单编码
      */
-    public void setPermissionCode(String permissionCode) {
-        this.permissionCode = permissionCode == null ? null : permissionCode.trim();
+    public void setMenuCode(String menuCode) {
+        this.menuCode = menuCode == null ? null : menuCode.trim();
     }
 
     /**
-     * 获取权限名称
+     * 获取菜单名称
      *
-     * @return permission_name - 权限名称
+     * @return menu_name - 菜单名称
      */
-    public String getPermissionName() {
-        return permissionName;
+    public String getMenuName() {
+        return menuName;
     }
 
     /**
-     * 设置权限名称
+     * 设置菜单名称
      *
-     * @param permissionName 权限名称
+     * @param menuName 菜单名称
      */
-    public void setPermissionName(String permissionName) {
-        this.permissionName = permissionName == null ? null : permissionName.trim();
+    public void setMenuName(String menuName) {
+        this.menuName = menuName == null ? null : menuName.trim();
     }
 
     /**
-     * 获取权限描述
+     * 获取菜单标题
      *
-     * @return permission_desc - 权限描述
+     * @return title - 菜单标题
      */
-    public String getPermissionDesc() {
-        return permissionDesc;
+    public String getTitle() {
+        return title;
     }
 
     /**
-     * 设置权限描述
+     * 设置菜单标题
      *
-     * @param permissionDesc 权限描述
+     * @param title 菜单标题
      */
-    public void setPermissionDesc(String permissionDesc) {
-        this.permissionDesc = permissionDesc == null ? null : permissionDesc.trim();
+    public void setTitle(String title) {
+        this.title = title == null ? null : title.trim();
     }
 
     /**
-     * 获取类型：1 - 操作，2 - 菜单
+     * 获取地址
      *
-     * @return type - 类型：1 - 操作，2 - 菜单
+     * @return url - 地址
      */
-    public String getType() {
-        return type;
+    public String getUrl() {
+        return url;
     }
 
     /**
-     * 设置类型：1 - 操作，2 - 菜单
+     * 设置地址
      *
-     * @param type 类型：1 - 操作，2 - 菜单
+     * @param url 地址
      */
-    public void setType(String type) {
-        this.type = type == null ? null : type.trim();
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
+
+    /**
+     * 获取类别
+     *
+     * @return category - 类别
+     */
+    public String getCategory() {
+        return category;
+    }
+
+    /**
+     * 设置类别
+     *
+     * @param category 类别
+     */
+    public void setCategory(String category) {
+        this.category = category == null ? null : category.trim();
     }
 
     /**
@@ -249,20 +271,20 @@ public class Permission {
     }
 
     /**
-     * 获取备注信息
+     * 获取备注
      *
-     * @return remark - 备注信息
+     * @return remark - 备注
      */
-    public String getRemark() {
+    public byte[] getRemark() {
         return remark;
     }
 
     /**
-     * 设置备注信息
+     * 设置备注
      *
-     * @param remark 备注信息
+     * @param remark 备注
      */
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    public void setRemark(byte[] remark) {
+        this.remark = remark;
     }
 }

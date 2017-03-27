@@ -1,11 +1,9 @@
 package com.taohj.fms.service.impl;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import org.springframework.util.CollectionUtils;
 
 import com.taohj.fms.model.UserPwdSalt;
 import com.taohj.fms.service.UserPwdSaltService;
@@ -34,14 +32,9 @@ public class UserPwdSaltServiceImpl extends BaseService<UserPwdSalt> implements 
 	public UserPwdSalt selectByUsername(String username) {
 		Example example = new Example(UserPwdSalt.class);
 		Criteria criteria = example.createCriteria();
-		criteria.andEqualTo("username", username);
 		criteria.andEqualTo("state", State.U.name());
-		List<UserPwdSalt> salts = selectByExample(example);
-		if (CollectionUtils.isEmpty(salts)) {
-			return null;
-		}
-		Assert.state(salts.size() == 1);
-		return salts.get(0);
+		criteria.andEqualTo("username", username);
+		return selectOne(example);
 	}
 
 }

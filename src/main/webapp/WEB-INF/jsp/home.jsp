@@ -31,10 +31,8 @@
 	    <div data-options="region:'west',title:'菜单',split:true" style="width:15%;">
 	    	<div class="easyui-accordion" data-options="fit:true,border:false">
 				<div title="个人收藏" data-options="selected:true">
-					<div class="list-group">
-					  <a href="javascript:void(0)" onclick="addTab('jquery','http://jquery.com/')" class="list-group-item">jquery</a>
-					  <a href="javascript:void(0)" onclick="addTab('baidu','http://www.baidu.com/')" class="list-group-item">baidu</a>
-					  <a href="javascript:void(0)" onclick="addTab('easyui','http://jquery.com/')" class="list-group-item">easyui</a>
+					<div class="list-group" id="menu">
+					<!-- 动态加载菜单 -->
 					</div>
 				</div>
 				<div title="理财信息">
@@ -62,9 +60,31 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/locale/easyui-lang-zh_CN.js"></script>
  	
  	<script type="text/javascript">
-	 	var height = $(window).height()
-	 	var navHeight = $('nav').height()
-	 	$('#cc').height(height - navHeight - 5);
+ 		
+ 		autoHeight();
+ 	
+ 		$(function($){
+ 		 	loadMenu();
+ 		})(jQuery);
+ 		
+ 		function autoHeight(){
+ 			var height = $(window).height()
+ 		 	var navHeight = $('nav').height()
+ 		 	$('#cc').height(height - navHeight - 5);
+ 		}
+ 		
+	 	// 获取菜单
+	 	function loadMenu(){
+	 		var url = '${pageContext.request.contextPath}/menu/all';
+	 		$.getJSON(url, function(data){
+	 	        var menuItems = '';
+	 			$.each(data, function(i, n){
+	 	        	var menuItem = '<a href="javascript:void(0)" onclick="addTab(\''+n.title+'\',\''+n.url+'\')" class="list-group-item">'+n.title+'</a>';
+	 	        	menuItems += menuItem;
+	 	        });
+	 			$('#menu').append(menuItems);
+	 		});
+	 	}
 	 	
 	 	function addTab(title, url){
 	 		if ($('#tt').tabs('exists', title)){
