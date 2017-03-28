@@ -28,21 +28,9 @@
 	</nav>
 	
 	<div id="cc" class="easyui-layout" style="width: 100%;margin-top: -20px;">
-	    <div data-options="region:'west',title:'菜单',split:true" style="width:15%;">
-	    	<div class="easyui-accordion" data-options="fit:true,border:false">
-				<div title="个人收藏" data-options="selected:true">
-					<div class="list-group" id="menu">
-					<!-- 动态加载菜单 -->
-					</div>
-				</div>
-				<div title="理财信息">
-					<div class="list-group">
-					  <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-					  <a href="#" class="list-group-item">Morbi leo risus</a>
-					  <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-					  <a href="#" class="list-group-item">Vestibulum at eros</a>
-					</div>
-				</div>
+	    <div data-options="region:'west',title:'菜单',split:true" style="width:15%;" id="west">
+	    	<div id="aa" class="easyui-accordion" data-options="fit:true,border:false" id="menu">
+	    	<!-- 动态panel -->	
 			</div>
 	    </div>
 	    <div id="content" data-options="region:'center',title:''" style="padding:5px;background:#eee;">
@@ -62,11 +50,8 @@
  	<script type="text/javascript">
  		
  		autoHeight();
- 	
- 		$(function($){
- 		 	loadMenu();
- 		})(jQuery);
- 		
+ 		loadMenu();
+
  		function autoHeight(){
  			var height = $(window).height()
  		 	var navHeight = $('nav').height()
@@ -77,14 +62,31 @@
 	 	function loadMenu(){
 	 		var url = '${pageContext.request.contextPath}/menu/all';
 	 		$.getJSON(url, function(data){
-	 	        var menuItems = '';
+	 	        var categoryObj = {};
 	 			$.each(data, function(i, n){
-	 	        	var menuItem = '<a href="javascript:void(0)" onclick="addTab(\''+n.title+'\',\''+n.url+'\')" class="list-group-item">'+n.title+'</a>';
-	 	        	menuItems += menuItem;
+	 				var category = n.category;
+	 				if(categoryObj[category] == null){
+	 					categoryObj[category] = '';
+	 				}
+	 	        	var item = '<a href="javascript:void(0)" onclick="addTab(\''+n.title+'\',\''+n.url+'\')" class="list-group-item">'+n.title+'</a>';
+	 	        	categoryObj[category] = categoryObj[category] + item;
 	 	        });
-	 			$('#menu').append(menuItems);
+	 			
+	 	        for(category in categoryObj){
+	 	        	var content = '<div class="list-group">'
+										+ categoryObj[category]
+								 +'</div>';
+					addPanel(category, content);
+	 	        }
 	 		});
 	 	}
+	 	
+	 	function addPanel(title, content){
+			$('#aa').accordion('add',{
+				title: title,
+				content: content
+			});
+		}
 	 	
 	 	function addTab(title, url){
 	 		if ($('#tt').tabs('exists', title)){
