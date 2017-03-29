@@ -3,8 +3,7 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "user_pwd_salt")
-public class UserPwdSalt {
+public class Order {
     /**
      * 主键
      */
@@ -13,14 +12,21 @@ public class UserPwdSalt {
     private Integer id;
 
     /**
+     * 订单流水号
+     */
+    @Column(name = "order_number")
+    private Long orderNumber;
+
+    /**
      * 用户名
      */
     private String username;
 
     /**
-     * 密码佐料
+     * 操作类型
      */
-    private String salt;
+    @Column(name = "business_type")
+    private String businessType;
 
     /**
      * 创建时间
@@ -29,24 +35,12 @@ public class UserPwdSalt {
     private Date createDate;
 
     /**
-     * 生效时间
-     */
-    @Column(name = "effective_date")
-    private Date effectiveDate;
-
-    /**
-     * 失效时间
-     */
-    @Column(name = "expire_date")
-    private Date expireDate;
-
-    /**
      * 状态
      */
     private String state;
 
     /**
-     * 备注信息
+     * 备注
      */
     private String remark;
 
@@ -69,6 +63,24 @@ public class UserPwdSalt {
     }
 
     /**
+     * 获取订单流水号
+     *
+     * @return order_number - 订单流水号
+     */
+    public Long getOrderNumber() {
+        return orderNumber;
+    }
+
+    /**
+     * 设置订单流水号
+     *
+     * @param orderNumber 订单流水号
+     */
+    public void setOrderNumber(Long orderNumber) {
+        this.orderNumber = orderNumber;
+    }
+
+    /**
      * 获取用户名
      *
      * @return username - 用户名
@@ -87,21 +99,21 @@ public class UserPwdSalt {
     }
 
     /**
-     * 获取密码佐料
+     * 获取操作类型
      *
-     * @return salt - 密码佐料
+     * @return business_type - 操作类型
      */
-    public String getSalt() {
-        return salt;
+    public String getBusinessType() {
+        return businessType;
     }
 
     /**
-     * 设置密码佐料
+     * 设置操作类型
      *
-     * @param salt 密码佐料
+     * @param businessType 操作类型
      */
-    public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
+    public void setBusinessType(String businessType) {
+        this.businessType = businessType == null ? null : businessType.trim();
     }
 
     /**
@@ -123,42 +135,6 @@ public class UserPwdSalt {
     }
 
     /**
-     * 获取生效时间
-     *
-     * @return effective_date - 生效时间
-     */
-    public Date getEffectiveDate() {
-        return effectiveDate;
-    }
-
-    /**
-     * 设置生效时间
-     *
-     * @param effectiveDate 生效时间
-     */
-    public void setEffectiveDate(Date effectiveDate) {
-        this.effectiveDate = effectiveDate;
-    }
-
-    /**
-     * 获取失效时间
-     *
-     * @return expire_date - 失效时间
-     */
-    public Date getExpireDate() {
-        return expireDate;
-    }
-
-    /**
-     * 设置失效时间
-     *
-     * @param expireDate 失效时间
-     */
-    public void setExpireDate(Date expireDate) {
-        this.expireDate = expireDate;
-    }
-
-    /**
      * 获取状态
      *
      * @return state - 状态
@@ -177,18 +153,18 @@ public class UserPwdSalt {
     }
 
     /**
-     * 获取备注信息
+     * 获取备注
      *
-     * @return remark - 备注信息
+     * @return remark - 备注
      */
     public String getRemark() {
         return remark;
     }
 
     /**
-     * 设置备注信息
+     * 设置备注
      *
-     * @param remark 备注信息
+     * @param remark 备注
      */
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();

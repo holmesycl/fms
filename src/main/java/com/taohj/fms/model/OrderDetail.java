@@ -3,8 +3,8 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "user_pwd_salt")
-public class UserPwdSalt {
+@Table(name = "order_detail")
+public class OrderDetail {
     /**
      * 主键
      */
@@ -13,14 +13,21 @@ public class UserPwdSalt {
     private Integer id;
 
     /**
-     * 用户名
+     * 订单流水号
      */
-    private String username;
+    @Column(name = "order_number")
+    private Long orderNumber;
 
     /**
-     * 密码佐料
+     * 理财产品ID
      */
-    private String salt;
+    @Column(name = "product_id")
+    private Integer productId;
+
+    /**
+     * 购买金额（分）
+     */
+    private Long amount;
 
     /**
      * 创建时间
@@ -29,13 +36,13 @@ public class UserPwdSalt {
     private Date createDate;
 
     /**
-     * 生效时间
+     * 产品生效时间
      */
     @Column(name = "effective_date")
     private Date effectiveDate;
 
     /**
-     * 失效时间
+     * 产品失效时间
      */
     @Column(name = "expire_date")
     private Date expireDate;
@@ -46,9 +53,9 @@ public class UserPwdSalt {
     private String state;
 
     /**
-     * 备注信息
+     * 备注
      */
-    private String remark;
+    private byte[] remark;
 
     /**
      * 获取主键
@@ -69,39 +76,57 @@ public class UserPwdSalt {
     }
 
     /**
-     * 获取用户名
+     * 获取订单流水号
      *
-     * @return username - 用户名
+     * @return order_number - 订单流水号
      */
-    public String getUsername() {
-        return username;
+    public Long getOrderNumber() {
+        return orderNumber;
     }
 
     /**
-     * 设置用户名
+     * 设置订单流水号
      *
-     * @param username 用户名
+     * @param orderNumber 订单流水号
      */
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setOrderNumber(Long orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
     /**
-     * 获取密码佐料
+     * 获取理财产品ID
      *
-     * @return salt - 密码佐料
+     * @return product_id - 理财产品ID
      */
-    public String getSalt() {
-        return salt;
+    public Integer getProductId() {
+        return productId;
     }
 
     /**
-     * 设置密码佐料
+     * 设置理财产品ID
      *
-     * @param salt 密码佐料
+     * @param productId 理财产品ID
      */
-    public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    /**
+     * 获取购买金额（分）
+     *
+     * @return amount - 购买金额（分）
+     */
+    public Long getAmount() {
+        return amount;
+    }
+
+    /**
+     * 设置购买金额（分）
+     *
+     * @param amount 购买金额（分）
+     */
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
     /**
@@ -123,36 +148,36 @@ public class UserPwdSalt {
     }
 
     /**
-     * 获取生效时间
+     * 获取产品生效时间
      *
-     * @return effective_date - 生效时间
+     * @return effective_date - 产品生效时间
      */
     public Date getEffectiveDate() {
         return effectiveDate;
     }
 
     /**
-     * 设置生效时间
+     * 设置产品生效时间
      *
-     * @param effectiveDate 生效时间
+     * @param effectiveDate 产品生效时间
      */
     public void setEffectiveDate(Date effectiveDate) {
         this.effectiveDate = effectiveDate;
     }
 
     /**
-     * 获取失效时间
+     * 获取产品失效时间
      *
-     * @return expire_date - 失效时间
+     * @return expire_date - 产品失效时间
      */
     public Date getExpireDate() {
         return expireDate;
     }
 
     /**
-     * 设置失效时间
+     * 设置产品失效时间
      *
-     * @param expireDate 失效时间
+     * @param expireDate 产品失效时间
      */
     public void setExpireDate(Date expireDate) {
         this.expireDate = expireDate;
@@ -177,20 +202,20 @@ public class UserPwdSalt {
     }
 
     /**
-     * 获取备注信息
+     * 获取备注
      *
-     * @return remark - 备注信息
+     * @return remark - 备注
      */
-    public String getRemark() {
+    public byte[] getRemark() {
         return remark;
     }
 
     /**
-     * 设置备注信息
+     * 设置备注
      *
-     * @param remark 备注信息
+     * @param remark 备注
      */
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
+    public void setRemark(byte[] remark) {
+        this.remark = remark;
     }
 }

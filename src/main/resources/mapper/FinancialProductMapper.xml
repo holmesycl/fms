@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.taohj.fms.mapper.FinancialProductMapper" >
+  <resultMap id="BaseResultMap" type="com.taohj.fms.model.FinancialProduct" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="product_id" property="productId" jdbcType="INTEGER" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="product_desc" property="productDesc" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="last_modify_date" property="lastModifyDate" jdbcType="TIMESTAMP" />
+    <result column="effective_date" property="effectiveDate" jdbcType="TIMESTAMP" />
+    <result column="expire_date" property="expireDate" jdbcType="TIMESTAMP" />
+    <result column="sale_start_date" property="saleStartDate" jdbcType="TIMESTAMP" />
+    <result column="sale_end_date" property="saleEndDate" jdbcType="TIMESTAMP" />
+    <result column="product_term" property="productTerm" jdbcType="INTEGER" />
+    <result column="limit_start_amount" property="limitStartAmount" jdbcType="BIGINT" />
+    <result column="limit_end_amount" property="limitEndAmount" jdbcType="BIGINT" />
+    <result column="product_type" property="productType" jdbcType="CHAR" />
+    <result column="risk_level" property="riskLevel" jdbcType="CHAR" />
+    <result column="expect_rate" property="expectRate" jdbcType="REAL" />
+    <result column="state" property="state" jdbcType="CHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+</mapper>

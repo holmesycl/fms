@@ -3,13 +3,14 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-public class User {
+@Table(name = "user_product")
+public class UserProduct {
     /**
-     * 用户ID
+     * 主键
      */
     @Id
-    @Column(name = "user_id")
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     /**
      * 用户名
@@ -17,32 +18,21 @@ public class User {
     private String username;
 
     /**
-     * 手机号码
+     * 理财产品ID
      */
-    @Column(name = "cellphone_number")
-    private String cellphoneNumber;
+    @Column(name = "product_id")
+    private Integer productId;
 
     /**
-     * 用户邮箱
+     * 金额（分）
      */
-    private String email;
-
-    /**
-     * 密码
-     */
-    private String password;
+    private Long amount;
 
     /**
      * 创建时间
      */
     @Column(name = "create_date")
     private Date createDate;
-
-    /**
-     * 最后一次修改时间
-     */
-    @Column(name = "last_modify_date")
-    private Date lastModifyDate;
 
     /**
      * 生效时间
@@ -62,26 +52,26 @@ public class User {
     private String state;
 
     /**
-     * 备注信息
+     * 备注
      */
     private String remark;
 
     /**
-     * 获取用户ID
+     * 获取主键
      *
-     * @return user_id - 用户ID
+     * @return id - 主键
      */
-    public Integer getUserId() {
-        return userId;
+    public Integer getId() {
+        return id;
     }
 
     /**
-     * 设置用户ID
+     * 设置主键
      *
-     * @param userId 用户ID
+     * @param id 主键
      */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     /**
@@ -103,57 +93,39 @@ public class User {
     }
 
     /**
-     * 获取手机号码
+     * 获取理财产品ID
      *
-     * @return cellphone_number - 手机号码
+     * @return product_id - 理财产品ID
      */
-    public String getCellphoneNumber() {
-        return cellphoneNumber;
+    public Integer getProductId() {
+        return productId;
     }
 
     /**
-     * 设置手机号码
+     * 设置理财产品ID
      *
-     * @param cellphoneNumber 手机号码
+     * @param productId 理财产品ID
      */
-    public void setCellphoneNumber(String cellphoneNumber) {
-        this.cellphoneNumber = cellphoneNumber == null ? null : cellphoneNumber.trim();
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     /**
-     * 获取用户邮箱
+     * 获取金额（分）
      *
-     * @return email - 用户邮箱
+     * @return amount - 金额（分）
      */
-    public String getEmail() {
-        return email;
+    public Long getAmount() {
+        return amount;
     }
 
     /**
-     * 设置用户邮箱
+     * 设置金额（分）
      *
-     * @param email 用户邮箱
+     * @param amount 金额（分）
      */
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    /**
-     * 获取密码
-     *
-     * @return password - 密码
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * 设置密码
-     *
-     * @param password 密码
-     */
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
     /**
@@ -172,24 +144,6 @@ public class User {
      */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
-    }
-
-    /**
-     * 获取最后一次修改时间
-     *
-     * @return last_modify_date - 最后一次修改时间
-     */
-    public Date getLastModifyDate() {
-        return lastModifyDate;
-    }
-
-    /**
-     * 设置最后一次修改时间
-     *
-     * @param lastModifyDate 最后一次修改时间
-     */
-    public void setLastModifyDate(Date lastModifyDate) {
-        this.lastModifyDate = lastModifyDate;
     }
 
     /**
@@ -247,18 +201,18 @@ public class User {
     }
 
     /**
-     * 获取备注信息
+     * 获取备注
      *
-     * @return remark - 备注信息
+     * @return remark - 备注
      */
     public String getRemark() {
         return remark;
     }
 
     /**
-     * 设置备注信息
+     * 设置备注
      *
-     * @param remark 备注信息
+     * @param remark 备注
      */
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();

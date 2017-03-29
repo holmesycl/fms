@@ -7,7 +7,7 @@
     -->
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="phone_num" jdbcType="VARCHAR" property="phoneNum" />
+    <result column="cellphone_number" jdbcType="VARCHAR" property="cellphoneNumber" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />

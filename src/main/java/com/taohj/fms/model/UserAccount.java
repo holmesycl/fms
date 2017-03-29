@@ -3,13 +3,14 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-public class User {
+@Table(name = "user_account")
+public class UserAccount {
     /**
-     * 用户ID
+     * 账户ID
      */
     @Id
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "account_id")
+    private Integer accountId;
 
     /**
      * 用户名
@@ -17,20 +18,9 @@ public class User {
     private String username;
 
     /**
-     * 手机号码
+     * 账户金额（分）
      */
-    @Column(name = "cellphone_number")
-    private String cellphoneNumber;
-
-    /**
-     * 用户邮箱
-     */
-    private String email;
-
-    /**
-     * 密码
-     */
-    private String password;
+    private Long amount;
 
     /**
      * 创建时间
@@ -62,26 +52,26 @@ public class User {
     private String state;
 
     /**
-     * 备注信息
+     * 备注
      */
     private String remark;
 
     /**
-     * 获取用户ID
+     * 获取账户ID
      *
-     * @return user_id - 用户ID
+     * @return account_id - 账户ID
      */
-    public Integer getUserId() {
-        return userId;
+    public Integer getAccountId() {
+        return accountId;
     }
 
     /**
-     * 设置用户ID
+     * 设置账户ID
      *
-     * @param userId 用户ID
+     * @param accountId 账户ID
      */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     /**
@@ -103,57 +93,21 @@ public class User {
     }
 
     /**
-     * 获取手机号码
+     * 获取账户金额（分）
      *
-     * @return cellphone_number - 手机号码
+     * @return amount - 账户金额（分）
      */
-    public String getCellphoneNumber() {
-        return cellphoneNumber;
+    public Long getAmount() {
+        return amount;
     }
 
     /**
-     * 设置手机号码
+     * 设置账户金额（分）
      *
-     * @param cellphoneNumber 手机号码
+     * @param amount 账户金额（分）
      */
-    public void setCellphoneNumber(String cellphoneNumber) {
-        this.cellphoneNumber = cellphoneNumber == null ? null : cellphoneNumber.trim();
-    }
-
-    /**
-     * 获取用户邮箱
-     *
-     * @return email - 用户邮箱
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * 设置用户邮箱
-     *
-     * @param email 用户邮箱
-     */
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    /**
-     * 获取密码
-     *
-     * @return password - 密码
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * 设置密码
-     *
-     * @param password 密码
-     */
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
     /**
@@ -247,18 +201,18 @@ public class User {
     }
 
     /**
-     * 获取备注信息
+     * 获取备注
      *
-     * @return remark - 备注信息
+     * @return remark - 备注
      */
     public String getRemark() {
         return remark;
     }
 
     /**
-     * 设置备注信息
+     * 设置备注
      *
-     * @param remark 备注信息
+     * @param remark 备注
      */
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();

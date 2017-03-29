@@ -9,6 +9,8 @@
     <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="effective_date" jdbcType="TIMESTAMP" property="effectiveDate" />
+    <result column="expire_date" jdbcType="TIMESTAMP" property="expireDate" />
     <result column="state" jdbcType="CHAR" property="state" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>

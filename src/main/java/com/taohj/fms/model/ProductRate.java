@@ -3,8 +3,8 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "user_pwd_salt")
-public class UserPwdSalt {
+@Table(name = "product_rate")
+public class ProductRate {
     /**
      * 主键
      */
@@ -13,20 +13,21 @@ public class UserPwdSalt {
     private Integer id;
 
     /**
-     * 用户名
+     * 产品
      */
-    private String username;
+    @Column(name = "product_id")
+    private Integer productId;
 
     /**
-     * 密码佐料
+     * 收益率
      */
-    private String salt;
+    private Float rate;
 
     /**
      * 创建时间
      */
-    @Column(name = "create_date")
-    private Date createDate;
+    @Column(name = "cteate_date")
+    private Date cteateDate;
 
     /**
      * 生效时间
@@ -46,7 +47,7 @@ public class UserPwdSalt {
     private String state;
 
     /**
-     * 备注信息
+     * 备注
      */
     private String remark;
 
@@ -69,57 +70,57 @@ public class UserPwdSalt {
     }
 
     /**
-     * 获取用户名
+     * 获取产品
      *
-     * @return username - 用户名
+     * @return product_id - 产品
      */
-    public String getUsername() {
-        return username;
+    public Integer getProductId() {
+        return productId;
     }
 
     /**
-     * 设置用户名
+     * 设置产品
      *
-     * @param username 用户名
+     * @param productId 产品
      */
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setProductId(Integer productId) {
+        this.productId = productId;
     }
 
     /**
-     * 获取密码佐料
+     * 获取收益率
      *
-     * @return salt - 密码佐料
+     * @return rate - 收益率
      */
-    public String getSalt() {
-        return salt;
+    public Float getRate() {
+        return rate;
     }
 
     /**
-     * 设置密码佐料
+     * 设置收益率
      *
-     * @param salt 密码佐料
+     * @param rate 收益率
      */
-    public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
+    public void setRate(Float rate) {
+        this.rate = rate;
     }
 
     /**
      * 获取创建时间
      *
-     * @return create_date - 创建时间
+     * @return cteate_date - 创建时间
      */
-    public Date getCreateDate() {
-        return createDate;
+    public Date getCteateDate() {
+        return cteateDate;
     }
 
     /**
      * 设置创建时间
      *
-     * @param createDate 创建时间
+     * @param cteateDate 创建时间
      */
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setCteateDate(Date cteateDate) {
+        this.cteateDate = cteateDate;
     }
 
     /**
@@ -177,18 +178,18 @@ public class UserPwdSalt {
     }
 
     /**
-     * 获取备注信息
+     * 获取备注
      *
-     * @return remark - 备注信息
+     * @return remark - 备注
      */
     public String getRemark() {
         return remark;
     }
 
     /**
-     * 设置备注信息
+     * 设置备注
      *
-     * @param remark 备注信息
+     * @param remark 备注
      */
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();

@@ -3,34 +3,26 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-public class User {
+@Table(name = "product_category_def")
+public class ProductCategoryDef {
     /**
-     * 用户ID
+     * 理财产品系列ID
      */
     @Id
-    @Column(name = "user_id")
-    private Integer userId;
+    @Column(name = "category_id")
+    private Integer categoryId;
 
     /**
-     * 用户名
+     * 理财产品系列名称
      */
-    private String username;
+    @Column(name = "category_name")
+    private String categoryName;
 
     /**
-     * 手机号码
+     * 理财产品系列描述
      */
-    @Column(name = "cellphone_number")
-    private String cellphoneNumber;
-
-    /**
-     * 用户邮箱
-     */
-    private String email;
-
-    /**
-     * 密码
-     */
-    private String password;
+    @Column(name = "category_desc")
+    private String categoryDesc;
 
     /**
      * 创建时间
@@ -62,98 +54,62 @@ public class User {
     private String state;
 
     /**
-     * 备注信息
+     * 备注
      */
     private String remark;
 
     /**
-     * 获取用户ID
+     * 获取理财产品系列ID
      *
-     * @return user_id - 用户ID
+     * @return category_id - 理财产品系列ID
      */
-    public Integer getUserId() {
-        return userId;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
     /**
-     * 设置用户ID
+     * 设置理财产品系列ID
      *
-     * @param userId 用户ID
+     * @param categoryId 理财产品系列ID
      */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     /**
-     * 获取用户名
+     * 获取理财产品系列名称
      *
-     * @return username - 用户名
+     * @return category_name - 理财产品系列名称
      */
-    public String getUsername() {
-        return username;
+    public String getCategoryName() {
+        return categoryName;
     }
 
     /**
-     * 设置用户名
+     * 设置理财产品系列名称
      *
-     * @param username 用户名
+     * @param categoryName 理财产品系列名称
      */
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName == null ? null : categoryName.trim();
     }
 
     /**
-     * 获取手机号码
+     * 获取理财产品系列描述
      *
-     * @return cellphone_number - 手机号码
+     * @return category_desc - 理财产品系列描述
      */
-    public String getCellphoneNumber() {
-        return cellphoneNumber;
+    public String getCategoryDesc() {
+        return categoryDesc;
     }
 
     /**
-     * 设置手机号码
+     * 设置理财产品系列描述
      *
-     * @param cellphoneNumber 手机号码
+     * @param categoryDesc 理财产品系列描述
      */
-    public void setCellphoneNumber(String cellphoneNumber) {
-        this.cellphoneNumber = cellphoneNumber == null ? null : cellphoneNumber.trim();
-    }
-
-    /**
-     * 获取用户邮箱
-     *
-     * @return email - 用户邮箱
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * 设置用户邮箱
-     *
-     * @param email 用户邮箱
-     */
-    public void setEmail(String email) {
-        this.email = email == null ? null : email.trim();
-    }
-
-    /**
-     * 获取密码
-     *
-     * @return password - 密码
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * 设置密码
-     *
-     * @param password 密码
-     */
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setCategoryDesc(String categoryDesc) {
+        this.categoryDesc = categoryDesc == null ? null : categoryDesc.trim();
     }
 
     /**
@@ -247,18 +203,18 @@ public class User {
     }
 
     /**
-     * 获取备注信息
+     * 获取备注
      *
-     * @return remark - 备注信息
+     * @return remark - 备注
      */
     public String getRemark() {
         return remark;
     }
 
     /**
-     * 设置备注信息
+     * 设置备注
      *
-     * @param remark 备注信息
+     * @param remark 备注
      */
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();

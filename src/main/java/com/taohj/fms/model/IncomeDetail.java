@@ -3,8 +3,8 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "user_pwd_salt")
-public class UserPwdSalt {
+@Table(name = "income_detail")
+public class IncomeDetail {
     /**
      * 主键
      */
@@ -18,9 +18,20 @@ public class UserPwdSalt {
     private String username;
 
     /**
-     * 密码佐料
+     * 收益类型。1 - 收益；2 - 亏损
      */
-    private String salt;
+    private String type;
+
+    /**
+     * 产品
+     */
+    @Column(name = "product_id")
+    private Integer productId;
+
+    /**
+     * 金额（分）
+     */
+    private Long amount;
 
     /**
      * 创建时间
@@ -29,24 +40,12 @@ public class UserPwdSalt {
     private Date createDate;
 
     /**
-     * 生效时间
-     */
-    @Column(name = "effective_date")
-    private Date effectiveDate;
-
-    /**
-     * 失效时间
-     */
-    @Column(name = "expire_date")
-    private Date expireDate;
-
-    /**
      * 状态
      */
     private String state;
 
     /**
-     * 备注信息
+     * 备注
      */
     private String remark;
 
@@ -87,21 +86,57 @@ public class UserPwdSalt {
     }
 
     /**
-     * 获取密码佐料
+     * 获取收益类型。1 - 收益；2 - 亏损
      *
-     * @return salt - 密码佐料
+     * @return type - 收益类型。1 - 收益；2 - 亏损
      */
-    public String getSalt() {
-        return salt;
+    public String getType() {
+        return type;
     }
 
     /**
-     * 设置密码佐料
+     * 设置收益类型。1 - 收益；2 - 亏损
      *
-     * @param salt 密码佐料
+     * @param type 收益类型。1 - 收益；2 - 亏损
      */
-    public void setSalt(String salt) {
-        this.salt = salt == null ? null : salt.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
+    }
+
+    /**
+     * 获取产品
+     *
+     * @return product_id - 产品
+     */
+    public Integer getProductId() {
+        return productId;
+    }
+
+    /**
+     * 设置产品
+     *
+     * @param productId 产品
+     */
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
+
+    /**
+     * 获取金额（分）
+     *
+     * @return amount - 金额（分）
+     */
+    public Long getAmount() {
+        return amount;
+    }
+
+    /**
+     * 设置金额（分）
+     *
+     * @param amount 金额（分）
+     */
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
     /**
@@ -123,42 +158,6 @@ public class UserPwdSalt {
     }
 
     /**
-     * 获取生效时间
-     *
-     * @return effective_date - 生效时间
-     */
-    public Date getEffectiveDate() {
-        return effectiveDate;
-    }
-
-    /**
-     * 设置生效时间
-     *
-     * @param effectiveDate 生效时间
-     */
-    public void setEffectiveDate(Date effectiveDate) {
-        this.effectiveDate = effectiveDate;
-    }
-
-    /**
-     * 获取失效时间
-     *
-     * @return expire_date - 失效时间
-     */
-    public Date getExpireDate() {
-        return expireDate;
-    }
-
-    /**
-     * 设置失效时间
-     *
-     * @param expireDate 失效时间
-     */
-    public void setExpireDate(Date expireDate) {
-        this.expireDate = expireDate;
-    }
-
-    /**
      * 获取状态
      *
      * @return state - 状态
@@ -177,18 +176,18 @@ public class UserPwdSalt {
     }
 
     /**
-     * 获取备注信息
+     * 获取备注
      *
-     * @return remark - 备注信息
+     * @return remark - 备注
      */
     public String getRemark() {
         return remark;
     }
 
     /**
-     * 设置备注信息
+     * 设置备注
      *
-     * @param remark 备注信息
+     * @param remark 备注
      */
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
