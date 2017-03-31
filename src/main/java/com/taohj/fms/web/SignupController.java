@@ -22,7 +22,7 @@ public class SignupController {
 
 	@RequestMapping(value = "/save")
 	public String saveUser(SignupCommand signupCommand) {
-		userService.createUser(signupCommand.getUsername(), signupCommand.getPassword(), signupCommand.getEmail());
+		userService.createUser(signupCommand.getUserType(), signupCommand.getUsername(), signupCommand.getPassword(), signupCommand.getEmail());
 		return "redirect:/s/login";
 	}
 }

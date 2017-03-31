@@ -29,7 +29,9 @@ public class MenuServiceImpl extends BaseService<Menu> implements MenuService {
 			for (RolePermission rolePermission : rolePermissions) {
 				String permission = rolePermission.getPermissionCode();
 				Menu menu = selectMenuByPermissioin(permission);
-				menus.add(menu);
+				if(menu != null){
+					menus.add(menu);
+				}
 			}
 		}
 		return menus;

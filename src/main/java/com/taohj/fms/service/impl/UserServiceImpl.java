@@ -10,10 +10,12 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.taohj.fms.model.User;
 import com.taohj.fms.model.UserPwdSalt;
+import com.taohj.fms.model.UserRole;
 import com.taohj.fms.pagination.PageCondition;
 import com.taohj.fms.pagination.PageResult;
 import com.taohj.fms.pagination.SimplePageResult;
 import com.taohj.fms.service.UserPwdSaltService;
+import com.taohj.fms.service.UserRoleService;
 import com.taohj.fms.service.UserService;
 import com.taohj.fms.util.EffectiveExample;
 import com.taohj.fms.util.PwdUtil;
@@ -28,6 +30,9 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 
 	@Autowired
 	private UserPwdSaltService userPwdSaltService;
+
+	@Autowired
+	private UserRoleService userRoleService;
 
 	@Override
 	public User saveUser(User user) {
@@ -53,7 +58,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	}
 
 	@Override
-	public User createUser(String username, String password, String email) {
+	public User createUser(int userType, String username, String password, String email) {
 		Assert.notNull(username, "用户名[username]不能为空.");
 		Assert.notNull(password, "密码[password]不能为空.");
 		Assert.notNull(email, "邮箱[email]不能为空.");
@@ -71,6 +76,26 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 		user.setState(State.U.name());
 		this.save(user);
 
+		/*
+		 * 赋予角色
+		 */
+		UserRole userRole = new UserRole();
+		userRole.setUsername(username);
+		userRole.setCreateDate(cur);
+		userRole.setEffectiveDate(cur);
+		userRole.setExpireDate(TimeUtil.expireDate());
+		userRole.setState(State.U.name());
+		// 普通用户
+		if (userType == 1) {
+			userRole.setRoleCode("normal");
+		}
+		// 银行用户
+		else if (userType == 2) {
+			userRole.setRoleCode("bank");
+		} else {
+			// ..
+		}
+		userRoleService.save(userRole);
 		return user;
 	}
 

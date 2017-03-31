@@ -12,6 +12,6 @@ public interface UserService extends IService<User> {
 
 	PageResult<User> selectAll(User user, PageCondition pageCondition);
 
-	User createUser(String username, String password, String email);
+	User createUser(int userType, String username, String password, String email);
 
 }

@@ -20,6 +20,11 @@ package com.taohj.fms.web;
 
 public class SignupCommand {
 
+	/**
+	 * 1：普通用户； 2：银行用户
+	 */
+	private int userType = 1;
+
 	private String username;
 
 	private String email;
@@ -27,6 +32,14 @@ public class SignupCommand {
 	private String password;
 
 	private String confirmationPassword;
+
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
+	}
 
 	public String getUsername() {
 		return username;
@@ -62,8 +75,7 @@ public class SignupCommand {
 
 	@Override
 	public String toString() {
-		return "SignupCommand [username=" + username + ", email=" + email + ", password=" + password + ", confirmationPassword="
-				+ confirmationPassword + "]";
+		return "SignupCommand [username=" + username + ", email=" + email + ", password=" + password + ", confirmationPassword=" + confirmationPassword + "]";
 	}
 
 }

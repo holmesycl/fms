@@ -31,6 +31,12 @@
 	      </button>
 	      <a class="navbar-brand" href="${pageContext.request.contextPath}/home">理财系统</a>
 	    </div>
+	     <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="${pageContext.request.contextPath}/signup">没有账号？点击注册</a></li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
 	  </div><!-- /.container-fluid -->
 	</nav>
 

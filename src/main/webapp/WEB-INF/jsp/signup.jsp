@@ -47,7 +47,7 @@
 							    <label for="radioUserType" class="col-sm-2 control-label">用户类型</label>
 							    <div class="col-sm-10">
 							      <label class="radio-inline">
-								    <input type="radio" name="userType" checked="checked" id="radioUserType" value="1"> 理财用户
+								    <input type="radio" name="userType" checked="checked" id="radioUserType" value="1"> 普通用户
 								  </label>
 								  <label class="radio-inline">
 								    <input type="radio" name="userType" value="2"> 银行用户

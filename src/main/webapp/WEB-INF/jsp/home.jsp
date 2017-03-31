@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -24,7 +25,29 @@
   <body>
   
 	<nav class="navbar navbar-default" style="border-radius: 0">
-	
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="${pageContext.request.contextPath}/home">理财系统</a>
+	    </div>
+	     <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav navbar-right">
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><shiro:principal/><span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+	            <li><a href="${pageContext.request.contextPath}/s/logout">退出登录</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
 	</nav>
 	
 	<div id="cc" class="easyui-layout" style="width: 100%;margin-top: -20px;">
@@ -35,7 +58,7 @@
 	    </div>
 	    <div id="content" data-options="region:'center',title:''" style="padding:5px;background:#eee;">
 	    	<div id="tt" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
-				<div title="About" data-options="href:'_content.html'" style="padding:10px"></div>
+				
 			</div>
 	    </div>
 	</div>
@@ -89,6 +112,7 @@
 		}
 	 	
 	 	function addTab(title, url){
+	 		console.log(url);
 	 		if ($('#tt').tabs('exists', title)){
 	 			$('#tt').tabs('select', title);
 	 		} else {
