@@ -3,7 +3,8 @@ package com.taohj.fms.model;
 import java.util.Date;
 import javax.persistence.*;
 
-public class Order {
+@Table(name = "product_order")
+public class ProductOrder {
     /**
      * 主键
      */

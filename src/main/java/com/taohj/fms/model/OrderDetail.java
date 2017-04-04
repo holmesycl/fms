@@ -18,6 +18,9 @@ public class OrderDetail {
     @Column(name = "order_number")
     private Long orderNumber;
 
+    @Column(name = "user_product_id")
+    private Long userProductId;
+
     /**
      * 理财产品ID
      */
@@ -91,6 +94,20 @@ public class OrderDetail {
      */
     public void setOrderNumber(Long orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    /**
+     * @return user_product_id
+     */
+    public Long getUserProductId() {
+        return userProductId;
+    }
+
+    /**
+     * @param userProductId
+     */
+    public void setUserProductId(Long userProductId) {
+        this.userProductId = userProductId;
     }
 
     /**

@@ -23,22 +23,64 @@
 
   </head>
   <body>
-  
-	<jsp:include page="nav.jsp"/>
 	
-	<div id="cc" class="easyui-layout" style="width: 100%;margin-top: -20px;">
-	    <div data-options="region:'west',title:'菜单',split:true" style="width:15%;" id="west">
-	    	<div id="aa" class="easyui-accordion" data-options="fit:true,border:false" id="menu">
-	    	<!-- 动态panel -->	
-			</div>
-	    </div>
-	    <div id="content" data-options="region:'center',title:''" style="padding:5px;background:#eee;">
-	    	<div id="tt" class="easyui-tabs" data-options="fit:true,border:false,plain:true">
+	<jsp:include page="../nav.jsp"/>
+	
+	<div class="container">
+			
+		  	<h3 style="font-size: 20px;color: #848484;">${product.productName }</h3>
+			<hr>
+			<div class="row">
+				<div class="col-md-3">
+				<p>
+					<span style="font-size: 40px;font-family: HelveticaNeueLt;color: #ff721f;">${product.expectRate }</span>
+					<span style="font-size: 26px;color: #ff721f;">%</span>
+				</p>
+				<p style="color: #848484;">预期年收益</p>
+				</div>
 				
+				<div class="col-md-3">
+					<p>
+						<span style="font-size: 40px;font-family: HelveticaNeueLt;">${product.productTerm }</span>
+						<span style="font-size: 26px;">天</span>
+					</p>
+					<p style="color: #848484;">投资期限</p>
+				</div>
+				
+				<div class="col-md-3">
+					<p>
+						<span style="font-size: 40px;font-family: HelveticaNeueLt;">${product.limitStartAmount }</span>
+						<span style="font-size: 26px;">元</span>
+					</p>
+					<p style="color: #848484;">起购金额</p>
+				</div>
+				
+				<div class="col-md-3">
+					<p>
+						<span style="font-size: 40px;font-family: HelveticaNeueLt;">${product.limitEndAmount }</span>
+						<span style="font-size: 26px;">元</span>
+					</p>
+					<p style="color: #848484;">最大限额</p>
+				</div>
 			</div>
-	    </div>
-	</div>
+			<hr>
+			<form class="form-inline pull-right">
+			 <div class="form-group sr-only">
+			    <label class="sr-only" for="inputProductId">产品ID</label>
+			    <input type="text" class="form-control" name="productId" value="${product.productId }" id="inputProductId" placeholder="购买金额">
+			  </div>
+			  <div class="form-group">
+			    <label class="sr-only" for="inputPurchaseAmount">购买金额</label>
+			    <div class="input-group">
+			      <div class="input-group-addon">￥</div>
+			      <input type="number" class="form-control" name="purchaseAmount" id="inputPurchaseAmount" placeholder="购买金额">
+			      <div class="input-group-addon">元</div>
+			    </div>
+			  </div>
+			  <button type="submit" class="btn btn-primary">购买</button>
+			</form>
 
+	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -48,59 +90,6 @@
  	
  	<script type="text/javascript">
  		
- 		autoHeight();
- 		loadMenu();
-
- 		function autoHeight(){
- 			var height = $(window).height()
- 		 	var navHeight = $('nav').height()
- 		 	$('#cc').height(height - navHeight - 5);
- 		}
- 		
-	 	// 获取菜单
-	 	function loadMenu(){
-	 		var url = '${pageContext.request.contextPath}/menu/all';
-	 		$.getJSON(url, function(data){
-	 	        var categoryObj = {};
-	 			$.each(data, function(i, n){
-	 				var category = n.category;
-	 				if(categoryObj[category] == null){
-	 					categoryObj[category] = '';
-	 				}
-	 	        	var item = '<a href="javascript:void(0)" onclick="addTab(\''+n.title+'\',\''+n.url+'\')" class="list-group-item">'+n.title+'</a>';
-	 	        	categoryObj[category] = categoryObj[category] + item;
-	 	        });
-	 			
-	 	        for(category in categoryObj){
-	 	        	var content = '<div class="list-group">'
-										+ categoryObj[category]
-								 +'</div>';
-					addPanel(category, content);
-	 	        }
-	 		});
-	 	}
-	 	
-	 	function addPanel(title, content){
-			$('#aa').accordion('add',{
-				title: title,
-				content: content
-			});
-		}
-	 	
-	 	function addTab(title, url){
-	 		console.log(url);
-	 		if ($('#tt').tabs('exists', title)){
-	 			$('#tt').tabs('select', title);
-	 		} else {
-	 			var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
-	 			$('#tt').tabs('add',{
-	 				title:title,
-	 				content:content,
-	 				closable:true
-	 			});
-	 		}
-	 	}
-
  	</script>
  
   </body>

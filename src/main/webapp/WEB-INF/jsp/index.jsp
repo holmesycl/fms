@@ -31,27 +31,8 @@
   </head>
   <body>
   
-	<nav class="navbar navbar-default" style="border-radius: 0">
-	  <div class="container-fluid">
-	    <!-- Brand and toggle get grouped for better mobile display -->
-	    <div class="navbar-header">
-	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-	        <span class="sr-only">Toggle navigation</span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	        <span class="icon-bar"></span>
-	      </button>
-	      <a class="navbar-brand" href="${pageContext.request.contextPath}/home">理财系统</a>
-	    </div>
-	     <!-- Collect the nav links, forms, and other content for toggling -->
-	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav navbar-right">
-	      	<li><a href="${pageContext.request.contextPath}/s/login">已有账号？点击登录</a></li>
-	      </ul>
-	    </div><!-- /.navbar-collapse -->
-	  </div><!-- /.container-fluid -->
-	</nav>
-	
+  	<jsp:include page="nav.jsp"/>
+  	
 	<div style="width: 100%;height: 400px;background-color: #ff4e4a;margin-top: -20px;">
 		<div class="container">
 			<div class="row">
@@ -503,7 +484,7 @@
 				 			        '</p>'+
 				 			        '<p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>'+
 				 			        '<hr>'+
-				 			         '<p class="text-center" style="font-size: 14px;line-height:45px; color: #fff;cursor: pointer;background-color: #ff721f;">立即购买</p>'+
+				 			         '<p data-product="'+n.productId+'" class="text-center view" style="font-size: 14px;line-height:45px; color: #fff;cursor: pointer;background-color: #ff721f;">立即购买</p>'+
 				 			      '</div>'+
 				 			    '</div>'+
 				 			  '</div>'
@@ -511,7 +492,15 @@
  				});
  				$('#topExpectRate').empty().append(html);
  			}
+ 			
+ 			$('.view').click(function(){
+ 	 			var $this = $(this);
+ 	 			var productId = $this.data('product');
+ 	 			location.href = '${pageContext.request.contextPath}' + '/view/product/' + productId;
+ 	 		});
  		});
+ 		
+ 		
  	});
 
  	</script>

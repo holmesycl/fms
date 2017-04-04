@@ -29,7 +29,7 @@ public class SecurityController {
 		} catch (AuthenticationException e) {
 			
 		}
-		return "redirect:/home";
+		return "redirect:/";
 	}
 
 	@RequestMapping("/logout")

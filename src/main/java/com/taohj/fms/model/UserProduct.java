@@ -9,8 +9,8 @@ public class UserProduct {
      * 主键
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "user_product_id")
+    private Long userProductId;
 
     /**
      * 用户名
@@ -59,19 +59,19 @@ public class UserProduct {
     /**
      * 获取主键
      *
-     * @return id - 主键
+     * @return user_product_id - 主键
      */
-    public Integer getId() {
-        return id;
+    public Long getUserProductId() {
+        return userProductId;
     }
 
     /**
      * 设置主键
      *
-     * @param id 主键
+     * @param userProductId 主键
      */
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserProductId(Long userProductId) {
+        this.userProductId = userProductId;
     }
 
     /**

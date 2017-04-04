@@ -11,4 +11,26 @@ public abstract class TimeUtil {
 		return calendar.getTime();
 	}
 
+	/**
+	 * 
+	 * @param days
+	 * @return
+	 */
+	public static Date plus(int days) {
+		return plus(new Date(), days);
+	}
+
+	/**
+	 * 
+	 * @param date
+	 * @param days
+	 * @return
+	 */
+	public static Date plus(Date date, int days) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DAY_OF_MONTH, days);
+		return calendar.getTime();
+	}
+
 }

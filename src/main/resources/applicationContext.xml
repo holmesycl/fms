@@ -156,7 +156,7 @@
          PropertiesPlaceholderConfigurer and abstract beans or anything else we might need: -->
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
-        <property name="loginUrl" value="/index"/>
+        <property name="loginUrl" value="/s/login"/>
         <property name="successUrl" value="/index"/>
         <property name="unauthorizedUrl" value="/s/unauthorized"/>
         <!-- The 'filters' property is not necessary since any declared javax.servlet.Filter bean
@@ -171,6 +171,8 @@
         <property name="filterChainDefinitions">
             <value>
             	/index == anon
+            	/index/** == anon
+            	/view/** == anon
                 /favicon.ico = anon
                 <!-- 静态数据 -->
                 /static/** = anon

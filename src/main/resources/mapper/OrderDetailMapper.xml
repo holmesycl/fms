@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.taohj.fms.mapper.OrderDetailMapper" >
-  <resultMap id="BaseResultMap" type="com.taohj.fms.model.OrderDetail" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.taohj.fms.mapper.OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.taohj.fms.model.OrderDetail">
     <!--
       WARNING - @mbggenerated
     -->
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="order_number" property="orderNumber" jdbcType="BIGINT" />
-    <result column="product_id" property="productId" jdbcType="INTEGER" />
-    <result column="amount" property="amount" jdbcType="BIGINT" />
-    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="effective_date" property="effectiveDate" jdbcType="TIMESTAMP" />
-    <result column="expire_date" property="expireDate" jdbcType="TIMESTAMP" />
-    <result column="state" property="state" jdbcType="CHAR" />
-    <result column="remark" property="remark" jdbcType="VARBINARY" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_number" jdbcType="BIGINT" property="orderNumber" />
+    <result column="user_product_id" jdbcType="BIGINT" property="userProductId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="amount" jdbcType="BIGINT" property="amount" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="effective_date" jdbcType="TIMESTAMP" property="effectiveDate" />
+    <result column="expire_date" jdbcType="TIMESTAMP" property="expireDate" />
+    <result column="state" jdbcType="CHAR" property="state" />
+    <result column="remark" jdbcType="VARBINARY" property="remark" />
   </resultMap>
 </mapper>
