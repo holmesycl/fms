@@ -6,14 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 import com.taohj.fms.model.User;
 import com.taohj.fms.model.UserPwdSalt;
 import com.taohj.fms.model.UserRole;
-import com.taohj.fms.pagination.PageCondition;
-import com.taohj.fms.pagination.PageResult;
-import com.taohj.fms.pagination.SimplePageResult;
 import com.taohj.fms.service.UserPwdSaltService;
 import com.taohj.fms.service.UserRoleService;
 import com.taohj.fms.service.UserService;
@@ -23,7 +18,6 @@ import com.taohj.fms.util.State;
 import com.taohj.fms.util.TimeUtil;
 
 import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.entity.Example.Criteria;
 
 @Service("userService")
 public class UserServiceImpl extends BaseService<User> implements UserService {
@@ -38,23 +32,6 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	public User saveUser(User user) {
 		this.save(user);
 		return user;
-	}
-
-	@Override
-	public PageResult<User> selectAll(User user, PageCondition pageCondition) {
-		Example example = new Example(User.class);
-		Criteria criteria = example.createCriteria();
-		if (user != null) {
-			if (user.getUserId() > 0) {
-				criteria.andEqualTo("user_id", user.getUserId());
-			}
-		}
-
-		// 分页查询
-		Page<User> page = PageHelper.startPage(pageCondition.getPageSize(), pageCondition.getPageSize());
-		selectByExample(example);
-
-		return SimplePageResult.create(page);
 	}
 
 	@Override
