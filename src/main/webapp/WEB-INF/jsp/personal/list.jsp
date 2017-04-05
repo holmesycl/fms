@@ -30,17 +30,55 @@
 	<jsp:include page="../nav.jsp"/>
 	
 	<div class="container">
-		<c:forEach var="row" items="${uesrProducts.rows }">
-			<div class="panel panel-default">
+		<c:forEach var="row" items="${uesrProducts.rows }" varStatus="status">
+			<c:set var="template">
+				<div class="col-md-4">
+				    <div class="thumbnail">
+				      <div class="caption">
+				        <p class="text-center" style="color: #333;font-style: normal;">12个月</p>
+				        <hr>
+				        <p class="text-center">
+				        	<span style="line-height: 60px;font-size: 55px;color: #ff721f;">8.9</span>
+				        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
+				        </p>
+				        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
+				        <hr>
+				         <p class="text-center" style="font-size: 14px;line-height:45px; color: #fff;cursor: pointer;background-color: #ff721f;">立即购买</p>
+				      </div>
+				    </div>
+			  	</div>
+			</c:set>
+			<%-- <c:set var="prefixRow" value="<div class="row" id="topExpectRate">"></c:set>
+			<c:set var="suffixRow" value="</div>"></c:set> --%>
+			
+			<c:choose>
+				<c:when test="${status.count % 3 == 1 }">
+					<%-- <c:out value="${prefixRow }"/> --%>
+					<c:out value="${template }"/>
+				</c:when>
+				<c:when test="${status.count % 3 == 0 }">
+					<c:out value="${template }"/>
+					<%-- <c:out value="${suffixRow }"/> --%>
+				</c:when>
+				<c:otherwise>
+					<c:out value="${template }"/>
+				</c:otherwise>
+			</c:choose>
+			<%-- <div class="panel panel-default">
 			  <div class="panel-heading">
 			  	<p><span><fmt:formatDate value="${row.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></span></p>
 			  </div>
 			  <div class="panel-body">
 			    <p>${row.productName }</p>
-			    <p>${row.effectiveDate } / ${row.expireDate }</p>
+			    <p>
+			    	<span><fmt:formatDate value="${row.effectiveDate }" pattern="yyyy-MM-dd HH:mm:ss" /></span>
+			    	 - 
+			    	<span><fmt:formatDate value="${row.expireDate }" pattern="yyyy-MM-dd HH:mm:ss" /></span>
+			    
+			    </p>
 			  </div>
 			</div>
-			<hr>
+			<hr> --%>
 		</c:forEach>
 	</div>
 	

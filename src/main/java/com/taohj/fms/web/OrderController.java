@@ -17,7 +17,7 @@ public class OrderController {
 
 	@RequestMapping("/purchase")
 	public ModelAndView purchaseProduct(int productId, long purchaseAmount) {
-		ModelAndView model = new ModelAndView("userProd/view");
+		ModelAndView model = new ModelAndView("personal/list");
 		long orderNumber = orderService.purchaseProduct(SecurityUtils.getSubject().getPrincipal().toString(), productId, purchaseAmount);
 		model.addObject("orderNumber", orderNumber);
 		return model;
