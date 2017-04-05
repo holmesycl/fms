@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 
 import com.github.pagehelper.Page;
@@ -56,6 +57,24 @@ public class UserProductServiceImpl extends BaseService<UserProduct> implements 
 			models.setRows(vals);
 		}
 		return models;
+	}
+
+	@Override
+	public UserProductModel findProduct(long userProductId) {
+		UserProduct userProduct = selectByKey(userProductId);
+		Assert.notNull(userProduct);
+		UserProductModel model = new UserProductModel();
+		try {
+			BeanUtils.copyProperties(model, userProduct);
+			int productId = userProduct.getProductId();
+			FinancialProduct product = financialProductService.selectByKey(productId);
+			model.setProductName(product.getProductName());
+		} catch (IllegalAccessException e) {
+			throw new RuntimeException(e);
+		} catch (InvocationTargetException e) {
+			throw new RuntimeException(e);
+		}
+		return model;
 	}
 
 }

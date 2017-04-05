@@ -2,7 +2,7 @@ package com.taohj.fms.web.model;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.apache.commons.lang.time.DateFormatUtils;
 
 public class UserProductModel {
 
@@ -52,6 +52,8 @@ public class UserProductModel {
 	 * 理财产品状态
 	 */
 	private String productState;
+
+	private String stateDesc;
 
 	/**
 	 * 获取主键
@@ -153,7 +155,6 @@ public class UserProductModel {
 	 *
 	 * @return create_date - 创建时间
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -173,7 +174,6 @@ public class UserProductModel {
 	 *
 	 * @return effective_date - 生效时间
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getEffectiveDate() {
 		return effectiveDate;
 	}
@@ -193,7 +193,6 @@ public class UserProductModel {
 	 *
 	 * @return expire_date - 失效时间
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public Date getExpireDate() {
 		return expireDate;
 	}
@@ -216,13 +215,13 @@ public class UserProductModel {
 	public String getProductState() {
 		Date cur = new Date();
 		if (cur.before(getEffectiveDate())) {
-			return "未生效";
+			this.productState = "1";
 		} else if (cur.after(getEffectiveDate()) && cur.before(getExpireDate())) {
-			return "收益中";
+			this.productState = "2";
 		} else if (cur.after(getExpireDate())) {
-			return "已过期";
+			this.productState = "3";
 		}
-		return productState;
+		return this.productState;
 	}
 
 	/**
@@ -233,6 +232,23 @@ public class UserProductModel {
 	 */
 	public void setProductState(String productState) {
 		this.productState = productState;
+	}
+
+	public String getStateDesc() {
+		Date cur = new Date();
+		String pattern = "yyyy-MM-dd";
+		if (cur.before(getEffectiveDate())) {
+			this.stateDesc = "即将产生收益：" + DateFormatUtils.format(getEffectiveDate(), pattern);
+		} else if (cur.after(getEffectiveDate()) && cur.before(getExpireDate())) {
+			this.stateDesc = "开始产生收益：" + DateFormatUtils.format(getEffectiveDate(), pattern);
+		} else if (cur.after(getExpireDate())) {
+			this.stateDesc = "到期停止收益：" + DateFormatUtils.format(getExpireDate(), pattern);
+		}
+		return this.stateDesc;
+	}
+
+	public void setStateDesc(String stateDesc) {
+		this.stateDesc = stateDesc;
 	}
 
 }

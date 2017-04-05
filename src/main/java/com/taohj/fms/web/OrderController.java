@@ -4,7 +4,6 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.taohj.fms.service.OrderService;
 
@@ -16,11 +15,9 @@ public class OrderController {
 	private OrderService orderService;
 
 	@RequestMapping("/purchase")
-	public ModelAndView purchaseProduct(int productId, long purchaseAmount) {
-		ModelAndView model = new ModelAndView("personal/list");
-		long orderNumber = orderService.purchaseProduct(SecurityUtils.getSubject().getPrincipal().toString(), productId, purchaseAmount);
-		model.addObject("orderNumber", orderNumber);
-		return model;
+	public String purchaseProduct(int productId, long purchaseAmount) {
+		long userProductId = orderService.purchaseProduct(SecurityUtils.getSubject().getPrincipal().toString(), productId, purchaseAmount);
+		return "redirect:/personal/product/" + userProductId;
 	}
 
 }

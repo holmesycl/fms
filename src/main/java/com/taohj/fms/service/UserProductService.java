@@ -16,4 +16,11 @@ public interface UserProductService extends IService<UserProduct> {
 	 */
 	PageResult<UserProductModel> findProduct(String username, int page, int rows);
 
+	/**
+	 * 
+	 * @param userProductId
+	 * @return
+	 */
+	UserProductModel findProduct(long userProductId);
+
 }

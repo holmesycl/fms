@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -20,65 +22,74 @@
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/bootstrap/easyui.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/icon.css">
-
+	<style type="text/css">
+	.item{
+		line-height: 50px;
+		font-size: 20px;
+	}
+	
+	</style>
   </head>
   <body>
 	
-	<jsp:include page="../nav.jsp"/>
-	
 	<div class="container">
-			
-		  	<h3 style="font-size: 20px;color: #848484;">${product.productName }</h3>
-			<hr>
-			<div class="row">
-				<div class="col-md-3">
-				<p>
-					<span style="font-size: 40px;font-family: HelveticaNeueLt;color: #ff721f;">${product.expectRate }</span>
-					<span style="font-size: 26px;color: #ff721f;">%</span>
-				</p>
-				<p style="color: #848484;">预期年收益</p>
-				</div>
-				
-				<div class="col-md-3">
-					<p>
-						<span style="font-size: 40px;font-family: HelveticaNeueLt;">${product.productTerm }</span>
-						<span style="font-size: 26px;">天</span>
-					</p>
-					<p style="color: #848484;">投资期限</p>
-				</div>
-				
-				<div class="col-md-3">
-					<p>
-						<span style="font-size: 40px;font-family: HelveticaNeueLt;">${product.limitStartAmount }</span>
-						<span style="font-size: 26px;">元</span>
-					</p>
-					<p style="color: #848484;">起购金额</p>
-				</div>
-				
-				<div class="col-md-3">
-					<p>
-						<span style="font-size: 40px;font-family: HelveticaNeueLt;">${product.limitEndAmount }</span>
-						<span style="font-size: 26px;">元</span>
-					</p>
-					<p style="color: #848484;">最大限额</p>
-				</div>
-			</div>
-			<hr>
-			<form class="form-inline pull-right" method="post" action="${pageContext.request.contextPath}/order/purchase">
-			 <div class="form-group sr-only">
-			    <label class="sr-only" for="inputProductId">产品ID</label>
-			    <input type="text" class="form-control" name="productId" value="${product.productId }" id="inputProductId" placeholder="购买金额">
-			  </div>
-			  <div class="form-group">
-			    <label class="sr-only" for="inputPurchaseAmount">购买金额</label>
-			    <div class="input-group">
-			      <div class="input-group-addon">￥</div>
-			      <input type="number" class="form-control" name="purchaseAmount" id="inputPurchaseAmount" placeholder="购买金额">
-			      <div class="input-group-addon">元</div>
-			    </div>
-			  </div>
-			  <button type="submit" class="btn btn-primary">购买</button>
-			</form>
+		
+	    <h3>${uesrProduct.productName }</h3>
+	  	<hr>
+	  	<div class="row">
+	  		<div class="col-md-3">
+	  			<p class="item text-right">订单编号</p>
+	  		</div>
+	  		<div class="col-md-9">
+	  			<p class="item">${uesrProduct.userProductId }</p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-3">
+	  			<p class="item text-right">购买金额</p>
+	  		</div>
+	  		<div class="col-md-9">
+	  			<p class="item">${uesrProduct.amount }元</p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-3">
+	  			<p class="item text-right">购买时间</p>
+	  		</div>
+	  		<div class="col-md-9">
+	  			<p class="item"><fmt:formatDate value="${uesrProduct.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-3">
+	  			<p class="item text-right">开始计算收益时间</p>
+	  		</div>
+	  		<div class="col-md-9">
+	  			<p class="item"><fmt:formatDate value="${uesrProduct.effectiveDate }" pattern="yyyy-MM-dd"/></p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-3">
+	  			<p class="item text-right">截止计算收益时间</p>
+	  		</div>
+	  		<div class="col-md-9">
+	  			<p class="item"><fmt:formatDate value="${uesrProduct.expireDate }" pattern="yyyy-MM-dd"/></p>
+	  		</div>
+	  	</div>
+	  	<div class="row">
+	  		<div class="col-md-3">
+	  			<p class="item text-right">已产生收益</p>
+	  		</div>
+	  		<div class="col-md-9">
+	  			<p class="item">0元<a class="btn btn-warning" style="margin-left: 20px;">收益详情</a></p>
+	  		</div>
+	  	</div>
+	  	<hr>
+	  	<div class="row">
+	  		<div class="col-md-3">
+	  			<p class="text-right"><a class="btn btn-danger btn-lg">赎回</a></p>
+	  		</div>
+	  	</div>
 
 	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

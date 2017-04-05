@@ -26,7 +26,7 @@ public class OrderServiceImpl extends BaseService<ProductOrder> implements Order
 
 	@Autowired
 	private FinancialProductService financialProductService;
-	
+
 	@Autowired
 	private UserProductService userProductService;
 
@@ -51,13 +51,13 @@ public class OrderServiceImpl extends BaseService<ProductOrder> implements Order
 		detail.setCreateDate(cur);
 		detail.setState(State.U.name());
 		// 次日算收益，次日生效
-		Date effectiveDate = TimeUtil.plus(1);
+		Date effectiveDate = TimeUtil.plus(1).start();
 		detail.setEffectiveDate(effectiveDate);
 		// 生效日 + 投资期限
 		FinancialProduct product = financialProductService.selectByKey(productId);
-		detail.setExpireDate(TimeUtil.plus(effectiveDate, product.getProductTerm()));
+		detail.setExpireDate(TimeUtil.plus(effectiveDate, product.getProductTerm()).end());
 		orderDetailService.save(detail);
-		
+
 		UserProduct userProduct = new UserProduct();
 		userProduct.setUserProductId(userProductId);
 		userProduct.setAmount(purchaseAmount);
@@ -70,7 +70,7 @@ public class OrderServiceImpl extends BaseService<ProductOrder> implements Order
 		userProduct.setExpireDate(detail.getExpireDate());
 		userProductService.save(userProduct);
 
-		return 1;
+		return userProductId;
 	}
 
 }
