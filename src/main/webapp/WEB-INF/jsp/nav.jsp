@@ -25,6 +25,9 @@
 	        </li>
       	</shiro:authenticated>
       	<shiro:notAuthenticated>
+      		<li><a href="${pageContext.request.contextPath}/signup">没有账号？点击注册</a></li>
+      	</shiro:notAuthenticated>
+      	<shiro:notAuthenticated>
       		<li><a href="${pageContext.request.contextPath}/s/login">已有账号？点击登录</a></li>
       	</shiro:notAuthenticated>
       </ul>
