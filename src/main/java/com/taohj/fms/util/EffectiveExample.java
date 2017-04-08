@@ -6,9 +6,9 @@ import tk.mybatis.mapper.entity.Example;
 
 public abstract class EffectiveExample extends Example {
 
-	private static final String PROPERTY_STATE = "state";
-	private static final String PROPERTY_EXPIRE_DATE = "expireDate";
-	private static final String PROPERTY_EFFECTIVE_DATE = "effectiveDate";
+	public static final String PROPERTY_STATE = "state";
+	public static final String PROPERTY_EXPIRE_DATE = "expireDate";
+	public static final String PROPERTY_EFFECTIVE_DATE = "effectiveDate";
 
 	public EffectiveExample(Class<?> entityClass) {
 		super(entityClass);

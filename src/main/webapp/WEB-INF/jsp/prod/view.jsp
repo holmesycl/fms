@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -33,7 +34,9 @@
 			<div class="row">
 				<div class="col-md-3">
 				<p>
-					<span style="font-size: 40px;font-family: HelveticaNeueLt;color: #ff721f;">${product.expectRate }</span>
+					<span style="font-size: 40px;font-family: HelveticaNeueLt;color: #ff721f;">
+						<fmt:formatNumber value="${product.expectRate * 100 }" pattern="#.00#"/>
+					</span>
 					<span style="font-size: 26px;color: #ff721f;">%</span>
 				</p>
 				<p style="color: #848484;">预期年收益</p>

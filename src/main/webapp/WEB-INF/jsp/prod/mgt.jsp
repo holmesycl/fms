@@ -41,6 +41,14 @@
 			    <input type="text" class="form-control" id="qryProductName">
 			  </div>
 			  <div class="form-group" style="margin-right: 20px;">
+			    <label class="control-label" for="qryProductType">期限类型：</label>
+			    <select id="qryTermType" class="form-control">
+			     	<option value="">全部</option>
+				  	<option value="1">定期</option>
+				  	<option value="2">活期</option>
+			  	</select>
+			  </div>
+			  <div class="form-group" style="margin-right: 20px;">
 			    <label class="control-label" for="qryProductType">产品类型：</label>
 			    <select id="qryProductType" class="form-control">
 			     	<option value="">全部</option>
@@ -67,7 +75,7 @@
 			data-options="fitColumns:true,striped:true,rownumbers:true,pagination:true,pageSize:20,url:'${pageContext.request.contextPath}/prod/query',singleSelect:true,method:'post',toolbar:tb">
 		</table>
 		
-		<div id="w" class="easyui-window" title="新增理财产品" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:65%;height:700px;padding:10px;">
+		<div id="w" class="easyui-window" title="新增理财产品" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:75%;height:750px;padding:10px;">
 			<div class="container-fluid">
 				<form id="ff" class="form-horizontal" method="post">
 				  	<div class="form-group">
@@ -104,6 +112,17 @@
 				    	<label for="datetimeboxSaleEndDate" class="col-sm-2 control-label">发售截止时间</label>
 				     	<div class="col-sm-2">
 				    		<input type="text" class="form-control easyui-datetimebox" name="saleEndDate" id="datetimeboxSaleEndDate">
+				    	</div>
+				 	</div>
+				 	<div class="form-group">
+				    	<label for="radioinlineTermType" class="col-sm-2 control-label">期限类型</label>
+				     	<div class="col-sm-10">
+				     		<label class="radio-inline">
+						  		<input type="radio" name="termType" id="radioinlineTermType" value="1"> 定期
+							</label>
+							<label class="radio-inline">
+						  		<input type="radio" name="termType" value="2"> 活期
+							</label>
 				    	</div>
 				 	</div>
 				 	<div class="form-group">
@@ -171,7 +190,7 @@
 				    	<label for="numberExpectRate" class="col-sm-2 control-label">预期收益率</label>
 				     	<div class="col-sm-3">
 				     		<div class="input-group">
-				    			<input type="number" class="form-control" name="expectRate" id="numberExpectRate">
+				    			<input type="text" class="form-control" name="expectRate" id="numberExpectRate">
 				    			<div class="input-group-addon">% / 年</div>
 				    		</div>
 				    	</div>
@@ -205,7 +224,18 @@
 	 			{field:'expireDate',title:'失效时间', width:150, align:'right'},
 	 			{field:'saleStartDate',title:'发售开始时间', width:150, align:'right'},
 	 			{field:'saleEndDate',title:'发售截止时间', width:150, align:'right'},
-	 			{field:'productTerm',title:'产品期限（天）', width:120, align:'right'},
+	 			{field:'termType',title:'期限类型', width:70, align:'right',
+	 				formatter: function(value, row, index){
+	 					var text = value;
+	 					if(value === '1'){
+	 						text = '定期';
+	 					}else if(value === '2'){
+	 						text = '活期';
+	 					}
+	 					return text;
+	 				}
+	 			},
+	 			{field:'productTerm',title:'产品期限（天）', width:110, align:'right'},
 	 			{field:'limitStartAmount',title:'起始限额（元）', width:100, align:'right'},
 	 			{field:'limitEndAmount',title:'最大限额（元）', width:100, align:'right'},
 	 			{field:'productType',title:'产品类型', width:120, align:'right',
@@ -247,6 +277,7 @@
 	 		$('#tt').datagrid('load',{
 	 			productId: $('#qryProductId').val(),
 	 			productName: $('#qryProductName').val(),
+	 			termType: $('#qryTermType').val(),
 	 			productType: $('#qryProductType').val(),
 	 			riskLevel: $('#qryRiskLevel').val()
 	 		});

@@ -31,7 +31,7 @@
 			<thead>
 				<tr>
 					<th>理财产品</th>
-					<th>购买金额（元）</th>
+					<th>总金额（元）</th>
 					<th>购买时间</th>
 					<th>产品状态</th>
 					<th></th>
@@ -48,7 +48,7 @@
 					</c:set>
 					<tr class="${_class }">
 						<td>${row.productName }</td>
-					  	<td>${row.amount }</td>
+					  	<td>${row.amount / 100 }</td>
 					  	<td><fmt:formatDate value="${row.createDate }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 					  	<td>${row.stateDesc }</td>
 					  	<td><a class="btn btn-default" href="${pageContext.request.contextPath}/personal/product/${row.userProductId }">详情</a></td>

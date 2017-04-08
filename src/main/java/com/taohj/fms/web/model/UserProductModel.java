@@ -12,6 +12,11 @@ public class UserProductModel {
 	private Long userProductId;
 
 	/**
+	 * 订单编号
+	 */
+	private Long orderNumber;
+
+	/**
 	 * 用户名
 	 */
 	private String username;
@@ -25,6 +30,16 @@ public class UserProductModel {
 	 * 理财产品名称
 	 */
 	private String productName;
+
+	/**
+	 * 期限类型
+	 */
+	private String termType;
+
+	/**
+	 * 期限类型名称
+	 */
+	private String termName;
 
 	/**
 	 * 金额
@@ -56,6 +71,11 @@ public class UserProductModel {
 	private String stateDesc;
 
 	/**
+	 * 收益
+	 */
+	private Long income;
+
+	/**
 	 * 获取主键
 	 *
 	 * @return user_product_id - 主键
@@ -72,6 +92,17 @@ public class UserProductModel {
 	 */
 	public void setUserProductId(Long userProductId) {
 		this.userProductId = userProductId;
+	}
+
+	public Long getOrderNumber() {
+		if (userProductId != null) {
+			orderNumber = Long.parseLong(userProductId.toString().substring(0, 17));
+		}
+		return orderNumber;
+	}
+
+	public void setOrderNumber(Long orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
 	/**
@@ -249,6 +280,68 @@ public class UserProductModel {
 
 	public void setStateDesc(String stateDesc) {
 		this.stateDesc = stateDesc;
+	}
+
+	public Long getIncome() {
+		return income;
+	}
+
+	public void setIncome(Long income) {
+		this.income = income;
+	}
+
+	public String getTermType() {
+		return termType;
+	}
+
+	public void setTermType(String termType) {
+		this.termType = termType;
+	}
+
+	public String getTermName() {
+		if ("1".equals(getTermType())) {
+			termName = "定期";
+		} else if ("2".equals(getTermType())) {
+			termName = "活期";
+		}
+		return termName;
+	}
+
+	public void setTermName(String termName) {
+		this.termName = termName;
+	}
+
+	/**
+	 * 到期时间
+	 */
+	private String endDate;
+
+	private String pedeemLimit;
+
+	private String canPedeem;
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getPedeemLimit() {
+		return pedeemLimit;
+	}
+
+	public void setPedeemLimit(String pedeemLimit) {
+		this.pedeemLimit = pedeemLimit;
+	}
+
+	public String getCanPedeem() {
+		return canPedeem;
+	}
+
+	public void setCanPedeem(String canPedeem) {
+		this.canPedeem = canPedeem;
 	}
 
 }

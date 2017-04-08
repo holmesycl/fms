@@ -26,6 +26,7 @@ public class FinancialProductServiceImpl extends BaseService<FinancialProduct> i
 		product.setCreateDate(cur);
 		product.setLastModifyDate(cur);
 		product.setState(State.U.name());
+		product.setExpectRate(product.getExpectRate() / 100);
 		save(product);
 	}
 
@@ -35,17 +36,22 @@ public class FinancialProductServiceImpl extends BaseService<FinancialProduct> i
 
 			@Override
 			protected void fillCriteria(Criteria criteria) {
-				if (productCondition.getProductId() != null) {
-					criteria.andEqualTo("productId", productCondition.getProductId());
-				}
-				if (StringUtils.hasText(productCondition.getProductName())) {
-					criteria.andLike("productName", "%" + productCondition.getProductName() + "%");
-				}
-				if (StringUtils.hasText(productCondition.getProductType())) {
-					criteria.andEqualTo("productType", productCondition.getProductType());
-				}
-				if (StringUtils.hasText(productCondition.getRiskLevel())) {
-					criteria.andEqualTo("riskLevel", productCondition.getRiskLevel());
+				if (productCondition != null) {
+					if (productCondition.getProductId() != null) {
+						criteria.andEqualTo("productId", productCondition.getProductId());
+					}
+					if (StringUtils.hasText(productCondition.getProductName())) {
+						criteria.andLike("productName", "%" + productCondition.getProductName() + "%");
+					}
+					if (StringUtils.hasText(productCondition.getTermType())) {
+						criteria.andEqualTo("termType", productCondition.getTermType());
+					}
+					if (StringUtils.hasText(productCondition.getProductType())) {
+						criteria.andEqualTo("productType", productCondition.getProductType());
+					}
+					if (StringUtils.hasText(productCondition.getRiskLevel())) {
+						criteria.andEqualTo("riskLevel", productCondition.getRiskLevel());
+					}
 				}
 			}
 		};
@@ -65,6 +71,18 @@ public class FinancialProductServiceImpl extends BaseService<FinancialProduct> i
 		example.setOrderByClause("expect_rate desc");
 		PageHelper.startPage(page, rows);
 		return selectByExample(example);
+	}
+
+	@Override
+	public List<FinancialProduct> findAllProduct() {
+		Example example = new EffectiveExample(FinancialProduct.class) {
+
+			@Override
+			protected void fillCriteria(Criteria criteria) {
+			}
+
+		};
+		return this.selectByExample(example);
 	}
 
 }

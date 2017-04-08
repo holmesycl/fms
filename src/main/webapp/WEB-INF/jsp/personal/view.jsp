@@ -34,22 +34,24 @@
 	
 	<div class="container">
 		
-	    <h3>${uesrProduct.productName }</h3>
+	    <h3>${userProduct.productName }</h3>
 	  	<hr>
 	  	<div class="row">
 	  		<div class="col-md-3">
-	  			<p class="item text-right">订单编号</p>
+	  			<p class="item text-right">理财方式</p>
 	  		</div>
 	  		<div class="col-md-9">
-	  			<p class="item">${uesrProduct.userProductId }</p>
+	  			<p class="item">${userProduct.termName }理财</p>
 	  		</div>
 	  	</div>
 	  	<div class="row">
 	  		<div class="col-md-3">
-	  			<p class="item text-right">购买金额</p>
+	  			<p class="item text-right">总金额（元）</p>
 	  		</div>
 	  		<div class="col-md-9">
-	  			<p class="item">${uesrProduct.amount }元</p>
+	  			<p class="item">
+	  				<fmt:formatNumber value="${userProduct.amount / 100 }" pattern="#,#00.00#"/>
+	  			</p>
 	  		</div>
 	  	</div>
 	  	<div class="row">
@@ -57,7 +59,7 @@
 	  			<p class="item text-right">购买时间</p>
 	  		</div>
 	  		<div class="col-md-9">
-	  			<p class="item"><fmt:formatDate value="${uesrProduct.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+	  			<p class="item"><fmt:formatDate value="${userProduct.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
 	  		</div>
 	  	</div>
 	  	<div class="row">
@@ -65,32 +67,62 @@
 	  			<p class="item text-right">开始计算收益时间</p>
 	  		</div>
 	  		<div class="col-md-9">
-	  			<p class="item"><fmt:formatDate value="${uesrProduct.effectiveDate }" pattern="yyyy-MM-dd"/></p>
+	  			<p class="item"><fmt:formatDate value="${userProduct.effectiveDate }" pattern="yyyy-MM-dd"/></p>
 	  		</div>
 	  	</div>
 	  	<div class="row">
 	  		<div class="col-md-3">
-	  			<p class="item text-right">截止计算收益时间</p>
+	  			<p class="item text-right">到期时间</p>
 	  		</div>
 	  		<div class="col-md-9">
-	  			<p class="item"><fmt:formatDate value="${uesrProduct.expireDate }" pattern="yyyy-MM-dd"/></p>
+	  			<p class="item">${userProduct.endDate }</p>
 	  		</div>
 	  	</div>
 	  	<div class="row">
 	  		<div class="col-md-3">
-	  			<p class="item text-right">已产生收益</p>
+	  			<p class="item text-right">累计收益（元）</p>
 	  		</div>
 	  		<div class="col-md-9">
-	  			<p class="item">0元<a class="btn btn-warning" style="margin-left: 20px;">收益详情</a></p>
+	  			<p class="item">
+	  				<fmt:formatNumber value="${userProduct.income / 100 }" pattern="#,#00.00#"/>
+	  				<a class="btn btn-warning" style="margin-left: 20px;" href="${pageContext.request.contextPath}/income/detail/${userProduct.productId }">收益详情</a>
+	  			</p>
 	  		</div>
 	  	</div>
 	  	<hr>
+	  	
+  		<h3>赎回理财产品</h3>
+	  	<hr>
 	  	<div class="row">
 	  		<div class="col-md-3">
-	  			<p class="text-right"><a class="btn btn-danger btn-lg">赎回</a></p>
+	  			<p class="item text-right">赎回限制</p>
+	  		</div>
+	  		<div class="col-md-9">
+	  			<p class="item">${userProduct.pedeemLimit }</p>
 	  		</div>
 	  	</div>
 
+	  	<div class="row">
+	  		<form id="ff" class="form-inline" action="${pageContext.request.contextPath}/order/pedeem/${userProduct.productId }" method="post">
+			  	<div class="form-group sr-only">
+			    	<input type="text" class="form-control" name="userProductId" id="inputUserProductId" value="${userProduct.userProductId }">
+			  	</div>
+			  	<div class="form-group col-md-3">
+			    	<label for="inputProductName" class="sr-only">金额</label>
+			    	<input type="text" class="form-control input-lg" name="amount" id="inputProductName" placeholder="输入赎回金额/元">
+			  	</div>
+			  	<c:if test="${userProduct.canPedeem == 2 }">
+			  		<div class="form-group col-md-9">
+				      	<button type="submit" class="btn btn-danger btn-lg" disabled="disabled">不可赎回</button>
+				  	</div>
+			  	</c:if>
+			  	<c:if test="${userProduct.canPedeem == 1 }">
+			  		<div class="form-group col-md-9">
+				      	<button type="submit" class="btn btn-danger btn-lg">赎回</button>
+				  	</div>
+			  	</c:if>
+			</form>
+	  	</div>
 	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>

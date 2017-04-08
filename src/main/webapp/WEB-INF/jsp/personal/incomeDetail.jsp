@@ -26,62 +26,44 @@
   </head>
   <body>
 	
-	<jsp:include page="../nav.jsp"/>
-	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<div class="row">
-					<div class="col-md-2"><label>订单编号</label></div>		
-					<div>
-						<p>${order.orderNumber }</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>创建时间</label></div>		
-					<div>
-						<p><fmt:formatDate value="${order.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>用户操作</label></div>		
-					<div>
-						<p>${order.businessName }</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>产品名称</label></div>		
-					<div>
-						<p>${order.productName }</p>
-					</div>
-				</div> 	
-				<div class="row">
-					<div class="col-md-2"><label>产品金额</label></div>		
-					<div>
-						<p>${order.amount / 100 } 元</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>生效时间</label></div>		
-					<div>
-						<p><fmt:formatDate value="${order.effectiveDate }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>失效时间</label></div>		
-					<div>
-						<p><fmt:formatDate value="${order.expireDate }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>状态</label></div>		
-					<div>
-						<p>成功</p>
-					</div>
-				</div>
-			</div>
-		</div>
+	<div class="container" style="margin-top: 20px;">
+		<c:choose>
+			<c:when test="${incomeDetails.size() == 0 }">
+				<p>暂无收益.</p>
+			</c:when>
+			<c:otherwise>
+				<table class="table table-hover">
+					<caption>${incomeDetails.get(0).productName }</caption>
+					<thead>
+						<tr>
+							<th>收益时间</th>
+							<th>收益状态</th>
+							<th>收益（元）</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="row" items="${incomeDetails }" varStatus="status">
+							<c:set var="_class">
+								<c:choose>
+									<c:when test="${row.type == 1 }">success</c:when>
+									<c:when test="${row.type == 2 }">active</c:when>
+								</c:choose>
+							</c:set>
+							<tr class="${_class }">
+								<td><fmt:formatDate value="${row.createDate }" pattern="yyyy-MM-dd" /></td>
+							  	<td>${row.typeName }</td>
+							  	<td>
+							  		<fmt:formatNumber value="${row.amount / 100 }" pattern="#,#00.00#"/>
+							  	</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<hr>
+			</c:otherwise>
+		</c:choose>
 	</div>
+	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

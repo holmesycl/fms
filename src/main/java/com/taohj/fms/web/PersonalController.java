@@ -30,9 +30,10 @@ public class PersonalController {
 
 	@RequestMapping("/product/{userProductId}")
 	public ModelAndView showProduct(@PathVariable long userProductId, ModelAndView model) {
-		UserProductModel userProduct = userProductService.findProduct(userProductId);
+		String username = (String) SecurityUtils.getSubject().getPrincipal();
+		UserProductModel userProduct = userProductService.findModelByUsernameAndUserProduct(username, userProductId);
 		model.setViewName("personal/view");
-		model.addObject("uesrProduct", userProduct);
+		model.addObject("userProduct", userProduct);
 		return model;
 	}
 

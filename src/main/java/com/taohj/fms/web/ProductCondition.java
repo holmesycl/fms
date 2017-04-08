@@ -19,6 +19,11 @@ public class ProductCondition {
 	private String productName;
 
 	/**
+	 * 期限类型
+	 */
+	private String termType;
+
+	/**
 	 * 产品类型
 	 */
 	private String productType;
@@ -58,6 +63,14 @@ public class ProductCondition {
 
 	public void setRiskLevel(String riskLevel) {
 		this.riskLevel = riskLevel;
+	}
+
+	public String getTermType() {
+		return termType;
+	}
+
+	public void setTermType(String termType) {
+		this.termType = termType;
 	}
 
 }

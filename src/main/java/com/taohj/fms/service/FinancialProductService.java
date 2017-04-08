@@ -32,5 +32,7 @@ public interface FinancialProductService extends IService<FinancialProduct> {
 	 * @return
 	 */
 	List<FinancialProduct> findTopExpectRateProduct(int page, int rows);
+	
+	List<FinancialProduct> findAllProduct();
 
 }
