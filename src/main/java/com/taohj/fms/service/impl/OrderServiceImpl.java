@@ -13,11 +13,14 @@ import org.springframework.util.CollectionUtils;
 import com.taohj.fms.model.FinancialProduct;
 import com.taohj.fms.model.OrderDetail;
 import com.taohj.fms.model.ProductOrder;
+import com.taohj.fms.model.UserAccount;
 import com.taohj.fms.model.UserProduct;
 import com.taohj.fms.service.FinancialProductService;
 import com.taohj.fms.service.OrderDetailService;
 import com.taohj.fms.service.OrderService;
+import com.taohj.fms.service.UserAccountService;
 import com.taohj.fms.service.UserProductService;
+import com.taohj.fms.util.FlowType;
 import com.taohj.fms.util.OrderNumberUtil;
 import com.taohj.fms.util.State;
 import com.taohj.fms.util.TimeUtil;
@@ -37,6 +40,9 @@ public class OrderServiceImpl extends BaseService<ProductOrder> implements Order
 
 	@Autowired
 	private UserProductService userProductService;
+
+	@Autowired
+	private UserAccountService userAccountService;
 
 	@Override
 	public long purchaseProduct(String username, int productId, long purchaseAmount) {
@@ -98,6 +104,14 @@ public class OrderServiceImpl extends BaseService<ProductOrder> implements Order
 		userProduct.setExpireDate(detail.getExpireDate());
 		userProductService.save(userProduct);
 
+		UserAccount account = userAccountService.findAccountByUsername(username);
+		if (purchaseAmount > account.getAmount()) {
+			throw new RuntimeException("账户余额不足.");
+		}
+
+		// 账户余额扣除购买金额
+		userAccountService.recharge(username, FlowType.PAY, purchaseAmount, "购买理财产品【" + product.getProductName() + "】");
+
 		return orderNumber;
 	}
 
@@ -139,7 +153,7 @@ public class OrderServiceImpl extends BaseService<ProductOrder> implements Order
 		}
 		return null;
 	}
-	
+
 	@Override
 	public long pedeemProduct(String username, int productId, long userProductId, long amount) {
 
@@ -182,6 +196,12 @@ public class OrderServiceImpl extends BaseService<ProductOrder> implements Order
 			nextUserProduct.setCreateDate(cur);
 			userProductService.save(nextUserProduct);
 		}
+
+		FinancialProduct product = financialProductService.selectByKey(productId);
+
+		// 账户充值
+		userAccountService.recharge(username, FlowType.INCOME, amount, "赎回理财产品【" + product.getProductName() + "】");
+
 		return orderNumber;
 	}
 

@@ -25,7 +25,7 @@ public class ProductRateSchedule implements Schedule {
 	@Autowired
 	private FinancialProductService financialProductService;
 
-	@Scheduled(cron = "0 0 18 * * ?")
+	@Scheduled(cron = "0 30 19 * * ?")
 	@Override
 	public void execute() {
 		List<FinancialProduct> products = financialProductService.findAllProduct();

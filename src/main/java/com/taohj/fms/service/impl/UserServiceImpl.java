@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import com.taohj.fms.model.User;
+import com.taohj.fms.model.UserAccount;
 import com.taohj.fms.model.UserPwdSalt;
 import com.taohj.fms.model.UserRole;
+import com.taohj.fms.service.UserAccountService;
 import com.taohj.fms.service.UserPwdSaltService;
 import com.taohj.fms.service.UserRoleService;
 import com.taohj.fms.service.UserService;
 import com.taohj.fms.util.EffectiveExample;
+import com.taohj.fms.util.FlowType;
 import com.taohj.fms.util.PwdUtil;
 import com.taohj.fms.util.State;
 import com.taohj.fms.util.TimeUtil;
@@ -28,11 +31,8 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 	@Autowired
 	private UserRoleService userRoleService;
 
-	@Override
-	public User saveUser(User user) {
-		this.save(user);
-		return user;
-	}
+	@Autowired
+	private UserAccountService userAccountService;
 
 	@Override
 	public User createUser(int userType, String username, String password, String email) {
@@ -73,6 +73,21 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 			// ..
 		}
 		userRoleService.save(userRole);
+
+		// 开通账户
+		UserAccount account = new UserAccount();
+		account.setAmount(0L);
+		account.setCreateDate(cur);
+		account.setState(State.U.name());
+		account.setUsername(username);
+		account.setEffectiveDate(user.getEffectiveDate());
+		account.setExpireDate(user.getExpireDate());
+		userAccountService.save(account);
+
+		// 账户充值 10W
+		long amount = 10000000;
+		userAccountService.recharge(username, FlowType.INCOME, amount, "系统充值");
+
 		return user;
 	}
 

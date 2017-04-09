@@ -8,4 +8,6 @@ public interface OrderDetailService extends IService<OrderDetail> {
 
 	List<OrderDetail> findOrderDetailByOrderNumber(long orderNumber);
 
+	List<Integer> findTopPopuProduct(int page, int rows);
+
 }

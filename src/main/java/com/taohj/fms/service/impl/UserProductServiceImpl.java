@@ -145,14 +145,18 @@ public class UserProductServiceImpl extends BaseService<UserProduct> implements 
 		Example example = new Example(UserProduct.class);
 		Criteria criteria = example.createCriteria();
 		criteria.andEqualTo("state", State.U.name()).andEqualTo("username", username).andEqualTo("productId", productId)
-		.andGreaterThanOrEqualTo(EffectiveExample.PROPERTY_EXPIRE_DATE, TimeUtil.plus(1).start());
+				.andGreaterThanOrEqualTo(EffectiveExample.PROPERTY_EXPIRE_DATE, TimeUtil.plus(1).start());
 		return selectByExample(example);
 	}
 
 	@Override
 	public List<UserProduct> findExpireDateGreaterNowUserProduct() {
-		Example example = new Example(UserProduct.class);
-		example.createCriteria().andEqualTo("state", State.U.name()).andGreaterThanOrEqualTo(EffectiveExample.PROPERTY_EXPIRE_DATE, new Date());
+		Example example = new EffectiveExample(UserProduct.class) {
+
+			@Override
+			protected void fillCriteria(Criteria criteria) {
+			}
+		};
 		return selectByExample(example);
 	}
 

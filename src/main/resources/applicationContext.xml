@@ -175,8 +175,8 @@
         </property> -->
         <property name="filterChainDefinitions">
             <value>
-            	/index == anon
-            	/index/** == anon
+            	/ == anon
+            	/qry/** == anon
             	/view/** == anon
                 /favicon.ico = anon
                 <!-- 静态数据 -->

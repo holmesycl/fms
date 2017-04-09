@@ -1,5 +1,9 @@
 package com.taohj.fms.web;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +25,10 @@ public class SignupController {
 	}
 
 	@RequestMapping(value = "/save")
-	public String saveUser(SignupCommand signupCommand) {
+	public void saveUser(SignupCommand signupCommand, HttpServletRequest request) {
 		userService.createUser(signupCommand.getUserType(), signupCommand.getUsername(), signupCommand.getPassword(), signupCommand.getEmail());
-		return "redirect:/s/login";
+		UsernamePasswordToken token = new UsernamePasswordToken(signupCommand.getUsername(), signupCommand.getPassword(), true);
+		token.setHost(request.getRemoteHost());
+		SecurityUtils.getSubject().login(token);
 	}
 }

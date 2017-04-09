@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -20,24 +22,17 @@
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/bootstrap/easyui.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/icon.css">
-	
-	<style type="text/css">
-	.banner { position: relative; overflow: auto; }
-    .banner li { list-style: none; }
-        .banner ul li { float: left; }
-	
-	</style>
 
   </head>
   <body>
   
   	<jsp:include page="nav.jsp"/>
   	
-	<div style="width: 100%;height: 400px;background-color: #ff4e4a;margin-top: -20px;">
+	<div style="width: 100%;height: 350px;background-color: #ff4e4a;margin-top: -20px;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-5 col-md-offset-7">
-					<div class="panel panel-default" style="margin-top: 50px;">
+					<div class="panel panel-default" style="margin-top: 30px;">
 					  <div class="panel-heading text-center">新用户注册</div>
 					  <div class="panel-body">
 						<form method="post" action="${pageContext.request.contextPath}/signup/save">
@@ -81,379 +76,143 @@
     <!-- 收益推荐 -->
     <div class="container" style="margin-top: 20px;">
     	<h3>收益推荐</h3>
-	    <div class="row" id="topExpectRate">
-		  <div class="col-md-4">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">12个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 60px;font-size: 55px;color: #ff721f;">8.9</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		         <p class="text-center" style="font-size: 14px;line-height:45px; color: #fff;cursor: pointer;background-color: #ff721f;">立即购买</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-4">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">12个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 60px;font-size: 55px;color: #ff721f;">8.9</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		         <p class="text-center" style="font-size: 14px;line-height:45px; color: #fff;cursor: pointer;background-color: #ff721f;">立即购买</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-4">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">12个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 60px;font-size: 55px;color: #ff721f;">8.9</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		         <p class="text-center" style="font-size: 14px;line-height:45px; color: #fff;cursor: pointer;background-color: #ff721f;">立即购买</p>
-		      </div>
-		    </div>
-		  </div>
-		</div>
+    	<div class="row">
+    	<c:forEach var="item" items="${data['topExpectRateProducts'] }">
+    		<div class="col-md-4">
+			    <div class="thumbnail">
+			      <div class="caption">
+			        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
+			        <hr>
+			        <p class="text-center">
+			        	<span style="line-height: 60px;font-size: 55px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
+			        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
+			        </p>
+			        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
+			        <hr>
+			         <p data-product="${item.productId }" class="text-center view" style="font-size: 14px;line-height:45px; color: #fff;cursor: pointer;background-color: #ff721f;">立即购买</p>
+			      </div>
+			    </div>
+		  	</div>
+    	</c:forEach>
+    	</div>
 	</div>
 	
 	<!-- 精品推荐 -->
     <div class="container" style="margin-top: 20px;">
     	<h3>精品推荐</h3>
-	    <div class="row">
-		  <div class="col-md-3">
+	    <div class="row" id="topRealRate">
+	    <c:forEach var="item" items="${data['topRealRateProducts'] }">
+	      <div class="col-md-3">
 		    <div class="thumbnail">
 		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">12个月</p>
+		        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
 		        <hr>
 		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">8.9</span>
+		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
 		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
 		        </p>
 		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
 		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
+		        <p data-product="${item.productId }" class="text-center view" style="font-size: 14px;color: #ff721f;cursor: pointer;">立即购买</p>
 		      </div>
 		    </div>
 		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">6个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">7.8</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">9个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">5.9</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">2个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">3.2</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
+	    </c:forEach>
 		</div>
 	</div>
 	
 	<!-- 人气推荐 -->
     <div class="container" style="margin-top: 20px;">
     	<h3>人气推荐</h3>
-	    <div class="row">
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">12个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">8.9</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">6个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">7.8</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">9个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">5.9</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">2个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">3.2</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-		<div class="row">
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">10个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">6.9</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">11个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">7.3</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">5个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">5.6</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">8个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">9.0</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		</div>
+    	<div class="row">
+    	<c:forEach var="item" items="${data['topPopuProducts'] }" varStatus="status">
+    		<c:if test="${status.count <= 4 }">
+    			<div class="col-md-3">
+				    <div class="thumbnail">
+				      <div class="caption">
+				        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
+				        <hr>
+				        <p class="text-center">
+				        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
+				        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
+				        </p>
+				        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
+				        <hr>
+				        <p data-product="${item.productId }" class="text-center view" style="font-size: 14px;color: #ff721f;cursor: pointer;">立即购买</p>
+				      </div>
+				    </div>
+				</div>
+    		</c:if>
+    	</c:forEach>
+    	</div>
+    	<div class="row" id="topPopu">
+    	<c:forEach var="item" items="${data['topPopuProducts'] }" varStatus="status">
+    		<c:if test="${status.count > 4 }">
+    			<div class="col-md-3">
+				    <div class="thumbnail">
+				      <div class="caption">
+				        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
+				        <hr>
+				        <p class="text-center">
+				        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
+				        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
+				        </p>
+				        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
+				        <hr>
+				        <p data-product="${item.productId }" class="text-center view" style="font-size: 14px;color: #ff721f;cursor: pointer;">立即购买</p>
+				      </div>
+				    </div>
+				</div>
+    		</c:if>
+    	</c:forEach>
+    	</div>
 	</div>
 	
 	<!-- 新品推荐 -->
     <div class="container" style="margin-top: 20px;">
     	<h3>新品推荐</h3>
 	    <div class="row">
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">12个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">8.9</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">6个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">7.8</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">9个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">5.9</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">2个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">3.2</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-		<div class="row">
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">10个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">6.9</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">11个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">7.3</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">5个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">5.6</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		  <div class="col-md-3">
-		    <div class="thumbnail">
-		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">8个月</p>
-		        <hr>
-		        <p class="text-center">
-		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;">9.0</span>
-		        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
-		        </p>
-		        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
-		        <hr>
-		        <p class="text-center" style="font-size: 14px;color: #ff721f;cursor: pointer;">查看详情</p>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-		
+    	<c:forEach var="item" items="${data['topNewProducts'] }" varStatus="status">
+    		<c:if test="${status.count <= 4 }">
+    			<div class="col-md-3">
+				    <div class="thumbnail">
+				      <div class="caption">
+				        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
+				        <hr>
+				        <p class="text-center">
+				        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
+				        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
+				        </p>
+				        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
+				        <hr>
+				        <p data-product="${item.productId }" class="text-center view" style="font-size: 14px;color: #ff721f;cursor: pointer;">立即购买</p>
+				      </div>
+				    </div>
+				</div>
+    		</c:if>
+    	</c:forEach>
+    	</div>
+    	<div class="row" id="topPopu">
+    	<c:forEach var="item" items="${data['topNewProducts'] }" varStatus="status">
+    		<c:if test="${status.count > 4 }">
+    			<div class="col-md-3">
+				    <div class="thumbnail">
+				      <div class="caption">
+				        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
+				        <hr>
+				        <p class="text-center">
+				        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
+				        	<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>
+				        </p>
+				        <p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>
+				        <hr>
+				        <p data-product="${item.productId }" class="text-center view" style="font-size: 14px;color: #ff721f;cursor: pointer;">立即购买</p>
+				      </div>
+				    </div>
+				</div>
+    		</c:if>
+    	</c:forEach>
+    	</div>
 		<hr>
 	</div>
 
@@ -467,7 +226,7 @@
  	
  	<script type="text/javascript">
  	$(function() {
- 		$.getJSON('${pageContext.request.contextPath}/index/data', function(data){
+ 		/* $.getJSON('${pageContext.request.contextPath}/index/data', function(data){
  			// 获取收益推荐数据(top_3_expect_rate)
  			if(data.TOP_EXPECT_RATE){
  				var d = data.TOP_EXPECT_RATE;
@@ -493,15 +252,89 @@
  				$('#topExpectRate').empty().append(html);
  			}
  			
- 			$('.view').click(function(){
- 	 			var $this = $(this);
- 	 			var productId = $this.data('product');
- 	 			location.href = '${pageContext.request.contextPath}' + '/view/product/' + productId;
- 	 		});
- 		});
+ 			if(data.TOP_REAL_RATE){
+ 				var d = data.TOP_REAL_RATE;
+ 				var html = '';
+ 				$.each(d,function(i, n){
+ 					
+ 					var item = '<div class="col-md-4">'+
+				 				    '<div class="thumbnail">'+
+				 			      '<div class="caption">'+
+				 			        '<p class="text-center" style="color: #333;font-style: normal;">'+n.productTerm+'天可赎回</p>'+
+				 			        '<hr>'+
+				 			        '<p class="text-center">'+
+				 			        	'<span style="line-height: 60px;font-size: 55px;color: #ff721f;">'+n.expectRate+'</span>'+
+				 			        	'<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>'+
+				 			        '</p>'+
+				 			        '<p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>'+
+				 			        '<hr>'+
+				 			         '<p data-product="'+n.productId+'" class="text-center view" style="font-size: 14px;line-height:45px; color: #fff;cursor: pointer;background-color: #ff721f;">立即购买</p>'+
+				 			      '</div>'+
+				 			    '</div>'+
+				 			  '</div>'
+				 	html += item;
+ 				});
+ 				$('#topExpectRate').empty().append(html);
+ 			}
+ 			
+ 			if(data.TOP_POPU){
+ 				var d = data.TOP_POPU;
+ 				var html = '';
+ 				$.each(d,function(i, n){
+ 					var item = '<div class="col-md-4">'+
+				 				    '<div class="thumbnail">'+
+				 			      '<div class="caption">'+
+				 			        '<p class="text-center" style="color: #333;font-style: normal;">'+n.productTerm+'天可赎回</p>'+
+				 			        '<hr>'+
+				 			        '<p class="text-center">'+
+				 			        	'<span style="line-height: 60px;font-size: 55px;color: #ff721f;">'+n.expectRate+'</span>'+
+				 			        	'<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>'+
+				 			        '</p>'+
+				 			        '<p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>'+
+				 			        '<hr>'+
+				 			         '<p data-product="'+n.productId+'" class="text-center view" style="font-size: 14px;line-height:45px; color: #fff;cursor: pointer;background-color: #ff721f;">立即购买</p>'+
+				 			      '</div>'+
+				 			    '</div>'+
+				 			  '</div>'
+				 	html += item;
+ 				});
+ 				$('#topExpectRate').empty().append(html);
+ 			}
+ 			
+ 			if(data.TOP_NEW){
+ 				var d = data.TOP_NEW;
+ 				var html = '';
+ 				$.each(d,function(i, n){
+ 					var item = '<div class="col-md-4">'+
+				 				    '<div class="thumbnail">'+
+				 			      '<div class="caption">'+
+				 			        '<p class="text-center" style="color: #333;font-style: normal;">'+n.productTerm+'天可赎回</p>'+
+				 			        '<hr>'+
+				 			        '<p class="text-center">'+
+				 			        	'<span style="line-height: 60px;font-size: 55px;color: #ff721f;">'+n.expectRate+'</span>'+
+				 			        	'<span style="font-size: 12px;line-height: 70px;color: #ff721f;font-style: normal">%</span>'+
+				 			        '</p>'+
+				 			        '<p class="text-center" style="line-height: 20px;font-size: 12px;color: #999;margin-top: -30px;">预期年收益</p>'+
+				 			        '<hr>'+
+				 			         '<p data-product="'+n.productId+'" class="text-center view" style="font-size: 14px;line-height:45px; color: #fff;cursor: pointer;background-color: #ff721f;">立即购买</p>'+
+				 			      '</div>'+
+				 			    '</div>'+
+				 			  '</div>'
+				 	html += item;
+ 				});
+ 				$('#topExpectRate').empty().append(html);
+ 			}
+ 			
+ 			
+ 		});*/
+ 		$('.view').click(function(){
+			var $this = $(this);
+			var productId = $this.data('product');
+			location.href = '${pageContext.request.contextPath}' + '/view/product/' + productId;
+		});
  		
- 		
- 	});
+ 	}); 
+ 	
 
  	</script>
  

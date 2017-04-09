@@ -13,4 +13,6 @@ public interface ProductRateService extends IService<ProductRate> {
 	 */
 	List<ProductRate> findProductTodayRate();
 
+	List<Integer> findTopRealRateProduct(int page, int rows);
+
 }

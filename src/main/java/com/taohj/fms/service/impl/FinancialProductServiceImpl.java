@@ -61,19 +61,6 @@ public class FinancialProductServiceImpl extends BaseService<FinancialProduct> i
 	}
 
 	@Override
-	public List<FinancialProduct> findTopExpectRateProduct(int page, int rows) {
-		Example example = new EffectiveExample(FinancialProduct.class) {
-
-			@Override
-			protected void fillCriteria(Criteria criteria) {
-			}
-		};
-		example.setOrderByClause("expect_rate desc");
-		PageHelper.startPage(page, rows);
-		return selectByExample(example);
-	}
-
-	@Override
 	public List<FinancialProduct> findAllProduct() {
 		Example example = new EffectiveExample(FinancialProduct.class) {
 

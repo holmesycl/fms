@@ -24,15 +24,8 @@ public interface FinancialProductService extends IService<FinancialProduct> {
 	 */
 	PageResult<FinancialProduct> queryProductByCondition(final ProductCondition productCondition, int pageNum, int pageSize);
 
-	/**
-	 * 按预期收益率降序分页查询理财产品
-	 * 
-	 * @param page
-	 * @param rows
-	 * @return
-	 */
-	List<FinancialProduct> findTopExpectRateProduct(int page, int rows);
 	
 	List<FinancialProduct> findAllProduct();
+
 
 }

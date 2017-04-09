@@ -65,6 +65,7 @@ public class SaltAwareAuthorizingRealm extends AuthorizingRealm {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		String username = token.getUsername();
 		User user = userService.selectByUsername(username);
+
 		if (user == null) {
 			throw new AuthenticationException("用户不存在.");
 		}
