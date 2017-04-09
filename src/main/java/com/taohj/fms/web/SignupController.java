@@ -25,10 +25,11 @@ public class SignupController {
 	}
 
 	@RequestMapping(value = "/save")
-	public void saveUser(SignupCommand signupCommand, HttpServletRequest request) {
+	public String saveUser(SignupCommand signupCommand, HttpServletRequest request) {
 		userService.createUser(signupCommand.getUserType(), signupCommand.getUsername(), signupCommand.getPassword(), signupCommand.getEmail());
 		UsernamePasswordToken token = new UsernamePasswordToken(signupCommand.getUsername(), signupCommand.getPassword(), true);
 		token.setHost(request.getRemoteHost());
 		SecurityUtils.getSubject().login(token);
+		return "redirect:/";
 	}
 }
