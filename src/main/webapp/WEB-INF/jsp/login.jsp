@@ -35,17 +35,19 @@
 						  <div class="panel-heading">用户密码登录</div>
 						  <div class="panel-body">
 							<form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/s/login">
-							  <div class="form-group">
+							  <div class="form-group ${login['usernameState'] }">
 							    <label for="inputUsername" class="col-sm-2 control-label">用户名</label>
 							    <div class="col-sm-10">
 							      <input type="text" class="form-control" name="username" id="inputUsername" placeholder="输入用户名">
 							    </div>
+							    <span class="help-block ${login['usernameDisplay'] }">${login['usernameMsg'] }</span>
 							  </div>
-							  <div class="form-group">
+							  <div class="form-group ${login.passwordState }">
 							    <label for="inputPassword" class="col-sm-2 control-label">密码</label>
 							    <div class="col-sm-10">
 							      <input type="password" class="form-control" name="password" id="inputPassword" placeholder="输入登陆密码">
 							    </div>
+							    <span class="help-block ${login.passwordDisplay }">${login.passwordMsg }</span>
 							  </div>
 							  <div class="form-group">
 							    <div class="col-sm-offset-2 col-sm-10">

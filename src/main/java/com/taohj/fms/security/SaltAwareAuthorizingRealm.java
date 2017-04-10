@@ -6,6 +6,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -65,20 +66,14 @@ public class SaltAwareAuthorizingRealm extends AuthorizingRealm {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 		String username = token.getUsername();
 		User user = userService.selectByUsername(username);
-
 		if (user == null) {
-			throw new AuthenticationException("用户不存在.");
+			throw new UnknownAccountException("用户不存在!");
 		}
 		String password = user.getPassword();
-
 		UserPwdSalt userPwdSalt = userPwdSaltService.selectByUsername(username);
-		if (userPwdSalt == null) {
-			throw new AuthenticationException("用户不存在.");
-		}
 		String salt = userPwdSalt.getSalt();
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(username, password, getName());
 		info.setCredentialsSalt(ByteSource.Util.bytes(salt));
-
 		return info;
 	}
 
