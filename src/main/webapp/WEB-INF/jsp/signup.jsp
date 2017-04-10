@@ -40,9 +40,13 @@
 				<div class="row">
 					<div class="col-sm-7">
 						<div class="panel panel-default">
-						  <!-- <div class="panel-heading">用户注册</div> -->
 						  <div class="panel-body">
 						    <form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/signup/save">
+						      <div class="form-group ${signup['otherState'] }">
+							    <div class="col-sm-10 col-sm-offset-2">
+							    	<span class="help-block ${signup['otherDisplay'] }">${signup['otherMsg'] }</span>
+							  	</div>
+							  </div>
 						      <div class="form-group">
 							    <label for="radioUserType" class="col-sm-2 control-label">用户类型</label>
 							    <div class="col-sm-10">
@@ -54,16 +58,17 @@
 								  </label>
 							    </div>
 							  </div>
-							  <div class="form-group">
+							  <div class="form-group ${signup['usernameState'] }">
 							    <label for="inputUsername" class="col-sm-2 control-label">用户名</label>
 							    <div class="col-sm-10">
 							      <input type="text" class="form-control" name="username" id="inputUsername" placeholder="输入用户名">
+							      <span class="help-block ${signup['usernameDisplay'] }">${signup['usernameMsg'] }</span>
 							    </div>
 							  </div>
 							  <div class="form-group">
 							    <label for="inputEmail" class="col-sm-2 control-label">邮箱</label>
 							    <div class="col-sm-10">
-							      <input type="email" class="form-control" name="email" id="inputEmail" placeholder="输入正确邮箱">
+							      <input type="text" class="form-control" name="email" id="inputEmail" placeholder="输入正确邮箱">
 							    </div>
 							  </div>
 							  <div class="form-group">
@@ -98,5 +103,49 @@
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="${pageContext.request.contextPath}/static/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<script type="text/javascript">
+  	(function($){
+  		$('.form-control').focusin(function() {
+  			$(this).parent().parent().removeClass('has-success').removeClass('has-error');
+  			$(this).next().removeClass('show').addClass('hidden');
+  		}).focusout(function(){
+  			var val = $(this).val();
+  			if(!val){
+  				$(this).parent().parent().addClass('has-error');
+  			}else{
+  				$(this).parent().parent().addClass('has-success');
+  			}
+  		});
+  		$('form').submit(function() {
+  			var username = $('#inputUsername').val();
+  			if(!username){
+  				$('#inputUsername').parent().parent().addClass('has-error');
+  				return false;
+  			}
+  			var eamil = $('#inputEmail').val();
+  			if(!eamil){
+  				$('#inputEmail').parent().parent().addClass('has-error');
+  				return false;
+  			}
+  		  	var password = $('#inputPassword').val();
+  		  	if(!password){
+  				$('#inputPassword').parent().parent().addClass('has-error');
+  				return false;
+  		  	}
+  		 	var confirmPassword = $('#inputConfirmPassword').val();
+		  	if(!confirmPassword){
+				$('#inputConfirmPassword').parent().parent().addClass('has-error');
+				return false;
+		  	}
+		  	if(password != confirmPassword){
+		  		$('#inputPassword').parent().parent().addClass('has-error');
+		  		$('#inputConfirmPassword').parent().parent().addClass('has-error');
+		  		return false;
+		  	}
+  		  	return true;
+  		});
+  	})(jQuery)
+  	
+  	</script>
   </body>
 </html>

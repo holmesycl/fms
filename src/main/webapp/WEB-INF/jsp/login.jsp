@@ -34,34 +34,29 @@
 						<div class="panel panel-default">
 						  <div class="panel-heading">用户密码登录</div>
 						  <div class="panel-body">
-							<form class="form-horizontal" method="post" action="${pageContext.request.contextPath}/s/login">
+							<form method="post" action="${pageContext.request.contextPath}/s/login">
+							  <div class="form-group ${login['otherState'] }">
+							    <span class="help-block ${login['otherDisplay'] }">${login['otherMsg'] }</span>
+							  </div>
 							  <div class="form-group ${login['usernameState'] }">
-							    <label for="inputUsername" class="col-sm-2 control-label">用户名</label>
-							    <div class="col-sm-10">
-							      <input type="text" class="form-control" name="username" id="inputUsername" placeholder="输入用户名">
-							    </div>
+							    <label for="inputUsername" class="control-label">用户名</label>
+							    <input type="text" class="form-control" name="username" id="inputUsername" value="${username }" placeholder="输入用户名">
 							    <span class="help-block ${login['usernameDisplay'] }">${login['usernameMsg'] }</span>
 							  </div>
 							  <div class="form-group ${login.passwordState }">
-							    <label for="inputPassword" class="col-sm-2 control-label">密码</label>
-							    <div class="col-sm-10">
-							      <input type="password" class="form-control" name="password" id="inputPassword" placeholder="输入登陆密码">
-							    </div>
+							    <label for="inputPassword" class="control-label">密码</label>
+							    <input type="password" class="form-control" name="password" id="inputPassword" placeholder="输入登陆密码">
 							    <span class="help-block ${login.passwordDisplay }">${login.passwordMsg }</span>
 							  </div>
 							  <div class="form-group">
-							    <div class="col-sm-offset-2 col-sm-10">
-							      <div class="checkbox">
-							        <label>
-							          <input type="checkbox"> 记住我
-							        </label>
-							      </div>
-							    </div>
+						      <div class="checkbox">
+						        <label>
+						          <input type="checkbox"> 记住我
+						        </label>
+						      </div>
 							  </div>
 							  <div class="form-group">
-							    <div class="col-sm-offset-2 col-sm-10">
-							      <button type="submit" class="btn btn-default">登录</button>
-							    </div>
+							  	<button type="submit" class="btn btn-primary btn-block">登录</button>
 							  </div>
 							</form>
 							
@@ -76,5 +71,34 @@
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="${pageContext.request.contextPath}/static/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  	<script type="text/javascript">
+  	(function($){
+  		$('.form-control').focusin(function() {
+  			$(this).parent().removeClass('has-success').removeClass('has-error');
+  			$(this).next().removeClass('show').addClass('hidden');
+  		}).focusout(function(){
+  			var val = $(this).val();
+  			if(!val){
+  				$(this).parent().addClass('has-error');
+  			}else{
+  				$(this).parent().addClass('has-success');
+  			}
+  		});
+  		$('form').submit(function() {
+  		  var username = $('#inputUsername').val();
+  		  if(!username){
+  			$('#inputUsername').parent().addClass('has-error');
+  			return false;
+  		  }
+  		  var password = $('#inputPassword').val();
+  		  if(!password){
+  			$('#inputPassword').parent().addClass('has-error');
+  			return false;
+  		  }
+  		  return true;
+  		});
+  	})(jQuery)
+  	
+  	</script>
   </body>
 </html>

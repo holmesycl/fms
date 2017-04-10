@@ -41,36 +41,47 @@ public class SecurityController {
 		UsernamePasswordToken token = new UsernamePasswordToken(command.getUsername(), command.getPassword(), command.isRememberMe());
 		token.setHost(request.getRemoteHost());
 		ModelAndView model = new ModelAndView();
-		Map<String, String> data = new HashMap<String, String>();
-		data.put("usernameState", "has-success");
-		data.put("usernameDisplay", "hidden");
-		data.put("usernameMsg", "登陆成功");
 		try {
 			SecurityUtils.getSubject().login(token);
 			model.setViewName(LOGIN_SUCCESS_VIEW);
 		} catch (UnknownAccountException e) {
 			// 用户不存在
 			String msg = "用户不存在！";
-			model.setViewName(LOGIN_FAIL_VIEW);
-			data.put("usernameState", "has-error");
-			data.put("usernameDisplay", "show");
-			data.put("usernameMsg", msg);
+			model = createModelAndView("UnknownAccount", msg);
+			model.addObject("username", command.getUsername());
 			log.error(msg, e);
 		} catch (IncorrectCredentialsException e) {
 			// 密码错误
 			String msg = "密码错误";
-			model.setViewName(LOGIN_FAIL_VIEW);
-			data.put("passwordState", "has-error");
-			data.put("passwordDisplay", "show");
-			data.put("passwordMsg", msg);
+			model = createModelAndView("IncorrectCredentials", msg);
+			model.addObject("username", command.getUsername());
 			log.error(msg, e);
 		} catch (AuthenticationException e) {
-			String msg = e.getMessage();
+			model = createModelAndView("other", e.getMessage());
+			model.addObject("username", command.getUsername());
+			log.error(e.getMessage(), e);
+		}
+		return model;
+	}
+
+	private ModelAndView createModelAndView(String loginState, String loginMsg) {
+		ModelAndView model = new ModelAndView();
+		Map<String, String> data = new HashMap<String, String>();
+		if ("UnknownAccount".equals(loginState)) {
+			data.put("usernameState", "has-error");
+			data.put("usernameDisplay", "show");
+			data.put("usernameMsg", loginMsg);
 			model.setViewName(LOGIN_FAIL_VIEW);
+		} else if ("IncorrectCredentials".equals(loginState)) {
 			data.put("passwordState", "has-error");
 			data.put("passwordDisplay", "show");
-			data.put("passwordMsg", msg);
-			log.error(msg, e);
+			data.put("passwordMsg", loginMsg);
+			model.setViewName(LOGIN_FAIL_VIEW);
+		} else if ("other".equals(loginState)) {
+			data.put("otherState", "has-error");
+			data.put("otherDisplay", "show");
+			data.put("otherMsg", loginMsg);
+			model.setViewName(LOGIN_FAIL_VIEW);
 		}
 		model.addObject(KEY_LOGIN, data);
 		return model;

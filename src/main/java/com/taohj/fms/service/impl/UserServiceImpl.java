@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import com.taohj.fms.exception.UserExistException;
 import com.taohj.fms.model.User;
 import com.taohj.fms.model.UserAccount;
 import com.taohj.fms.model.UserPwdSalt;
@@ -40,9 +41,15 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 		Assert.notNull(password, "密码[password]不能为空.");
 		Assert.notNull(email, "邮箱[email]不能为空.");
 
+		// 校验用户是否已存在
+		User user = selectByUsername(username);
+		if (user != null) {
+			throw new UserExistException("用户" + username + "已存在！");
+		}
+
 		UserPwdSalt userPwdSalt = userPwdSaltService.createUserPwdSalt(username);
 
-		User user = new User();
+		user = new User();
 		user.setUsername(username);
 		user.setPassword(PwdUtil.sha256Hash(password, userPwdSalt.getSalt()));
 		user.setEmail(email);
