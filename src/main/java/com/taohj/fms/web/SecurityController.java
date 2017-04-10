@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SecurityController {
 
-	private static final String LOGIN_SUCCESS_VIEW = "/index";
+	private static final String LOGIN_SUCCESS_VIEW = "redirect:/index";
 
 	private static final String LOGIN_FAIL_VIEW = "/login";
 

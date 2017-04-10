@@ -23,7 +23,7 @@ public class SignupController {
 
 	private static final String SIGN_UP_PAGE = "signup";
 
-	private static final String SIGN_UP_SUCCESS_VIEW = "index";
+	private static final String SIGN_UP_SUCCESS_VIEW = "redirect:/index";
 
 	private static final String SIGN_UP_FAIL_VIEW = SIGN_UP_PAGE;
 
