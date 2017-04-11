@@ -28,51 +28,52 @@
   
   	<jsp:include page="nav.jsp"/>
   	
-	<div style="width: 100%;height: 350px;background-color: #ff4e4a;margin-top: -20px;">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-5 col-md-offset-7">
-					<div class="panel panel-default" style="margin-top: 30px;">
-					  <div class="panel-heading text-center">新用户注册</div>
-					  <div class="panel-body">
-						<form method="post" action="${pageContext.request.contextPath}/signup/save">
-					      <div class="form-group sr-only">
-						  	  <label for="radioUserType" class="sr-only">用户类型</label>
-						  	  <div class="col-md-10 col-md-offset-1" style="margin-top: 20px;">
-						  	  	<input type="radio" name="userType" checked="checked" id="radioUserType" value="1"> 普通用户
-						  	  </div>
-						  </div>
-						  <div class="form-group">
-						    <label for="inputUsername" class="sr-only">用户名</label>
-						    <div class="col-md-10 col-md-offset-1" style="margin-top: 20px;">
-						      <input type="text" class="form-control" name="username" id="inputUsername" placeholder="用户名">
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <label for="inputEmail" class="sr-only">邮箱</label>
-						    <div class="col-md-10 col-md-offset-1" style="margin-top: 20px;">
-						      <input type="email" class="form-control" name="email" id="inputEmail" placeholder="邮箱">
-						    </div>
-						  </div>
-						  <div class="form-group">
-						    <label for="inputPassword" class="sr-only">密码</label>
-						    <div class="col-md-10 col-md-offset-1" style="margin-top: 20px;">
-						      <input type="password" class="form-control" name="password" id="inputPassword" placeholder="登陆密码">
-						  	</div>
-						  </div>
-						  <div class="form-group">
-						  	<div class="col-md-10 col-md-offset-1" style="margin-top: 20px;margin-bottom: 20px;">
-						      <button type="submit" class="btn btn-default btn-block" style="background-color: #ff721f;color: aliceblue;">确认注册</button>
-						    </div>
-						  </div>
-						</form>
+  	<shiro:notAuthenticated>
+		<div style="width: 100%;height: 350px;background-color: #ff4e4a;margin-top: -20px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5 col-md-offset-7">
+						<div class="panel panel-default" style="margin-top: 30px;">
+						  <div class="panel-heading text-center">新用户注册</div>
+						  <div class="panel-body">
+							<form method="post" action="${pageContext.request.contextPath}/signup/save">
+						      <div class="form-group sr-only">
+							  	  <label for="radioUserType" class="sr-only">用户类型</label>
+							  	  <div class="col-md-10 col-md-offset-1" style="margin-top: 20px;">
+							  	  	<input type="radio" name="userType" checked="checked" id="radioUserType" value="1"> 普通用户
+							  	  </div>
+							  </div>
+							  <div class="form-group">
+							    <label for="inputUsername" class="sr-only">用户名</label>
+							    <div class="col-md-10 col-md-offset-1" style="margin-top: 20px;">
+							      <input type="text" class="form-control" name="username" id="inputUsername" placeholder="用户名">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label for="inputEmail" class="sr-only">邮箱</label>
+							    <div class="col-md-10 col-md-offset-1" style="margin-top: 20px;">
+							      <input type="email" class="form-control" name="email" id="inputEmail" placeholder="邮箱">
+							    </div>
+							  </div>
+							  <div class="form-group">
+							    <label for="inputPassword" class="sr-only">密码</label>
+							    <div class="col-md-10 col-md-offset-1" style="margin-top: 20px;">
+							      <input type="password" class="form-control" name="password" id="inputPassword" placeholder="登陆密码">
+							  	</div>
+							  </div>
+							  <div class="form-group">
+							  	<div class="col-md-10 col-md-offset-1" style="margin-top: 20px;margin-bottom: 20px;">
+							      <button type="submit" class="btn btn-default btn-block" style="background-color: #ff721f;color: aliceblue;">确认注册</button>
+							    </div>
+							  </div>
+							</form>
+						</div>
+					  </div>
 					</div>
-				  </div>
 				</div>
 			</div>
 		</div>
-	</div>
-    
+    </shiro:notAuthenticated>
     <!-- 收益推荐 -->
     <div class="container" style="margin-top: 20px;">
     	<h3>收益推荐</h3>
@@ -81,7 +82,7 @@
     		<div class="col-md-4">
 			    <div class="thumbnail">
 			      <div class="caption">
-			        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
+			        <p class="text-center" style="color: #333;font-style: normal;">${item.productName }</p>
 			        <hr>
 			        <p class="text-center">
 			        	<span style="line-height: 60px;font-size: 55px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
@@ -105,7 +106,7 @@
 	      <div class="col-md-3">
 		    <div class="thumbnail">
 		      <div class="caption">
-		        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
+		        <p class="text-center" style="color: #333;font-style: normal;">${item.productName }</p>
 		        <hr>
 		        <p class="text-center">
 		        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
@@ -130,7 +131,7 @@
     			<div class="col-md-3">
 				    <div class="thumbnail">
 				      <div class="caption">
-				        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
+				        <p class="text-center" style="color: #333;font-style: normal;">${item.productName }</p>
 				        <hr>
 				        <p class="text-center">
 				        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
@@ -151,7 +152,7 @@
     			<div class="col-md-3">
 				    <div class="thumbnail">
 				      <div class="caption">
-				        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
+				        <p class="text-center" style="color: #333;font-style: normal;">${item.productName }</p>
 				        <hr>
 				        <p class="text-center">
 				        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
@@ -177,7 +178,7 @@
     			<div class="col-md-3">
 				    <div class="thumbnail">
 				      <div class="caption">
-				        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
+				        <p class="text-center" style="color: #333;font-style: normal;">${item.productName }</p>
 				        <hr>
 				        <p class="text-center">
 				        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
@@ -198,7 +199,7 @@
     			<div class="col-md-3">
 				    <div class="thumbnail">
 				      <div class="caption">
-				        <p class="text-center" style="color: #333;font-style: normal;">${item.productTerm }天</p>
+				        <p class="text-center" style="color: #333;font-style: normal;">${item.productName }</p>
 				        <hr>
 				        <p class="text-center">
 				        	<span style="line-height: 50px;font-size: 48px;color: #ff721f;"><fmt:formatNumber value="${item.expectRate * 100 }" pattern="#,##0.00"/></span>
