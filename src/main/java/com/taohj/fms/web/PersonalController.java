@@ -5,9 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.taohj.fms.model.User;
 import com.taohj.fms.service.UserProductService;
+import com.taohj.fms.service.UserService;
+import com.taohj.fms.util.WebResponse;
 import com.taohj.fms.web.model.UserProductModel;
 
 @Controller
@@ -16,6 +20,33 @@ public class PersonalController {
 
 	@Autowired
 	private UserProductService userProductService;
+	
+	@Autowired
+	private UserService userService;
+	
+	@RequestMapping("/user/basicInfo")
+	public ModelAndView showUserBasicInfo(ModelAndView model) {
+		String username = (String) SecurityUtils.getSubject().getPrincipal();
+		User user = userService.selectByUsername(username);
+		model.setViewName("personal/basicInfo");
+		model.addObject("user", user);
+		return model;
+	}
+	
+	@RequestMapping("/user/updateBasicInfo")
+	@ResponseBody
+	public WebResponse updateUserBasicInfo(User user) {
+		String username = (String) SecurityUtils.getSubject().getPrincipal();
+		user.setUsername(username);
+		WebResponse webResponse = null;
+		try {
+			userService.updateUserInfo(user);
+			webResponse = WebResponse.info("用户信息修改成功。");
+		} catch (Exception e) {
+			webResponse = WebResponse.info("用户信息修改失败。");
+		}
+		return webResponse;
+	}
 
 	@RequestMapping("/product/list")
 	public ModelAndView listProduct(ModelAndView model) {

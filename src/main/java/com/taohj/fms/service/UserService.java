@@ -8,4 +8,11 @@ public interface UserService extends IService<User> {
 
 	User createUser(int userType, String username, String password, String email);
 
+	/**
+	 * 修改用户信息
+	 * 
+	 * @param user
+	 */
+	void updateUserInfo(User user);
+
 }

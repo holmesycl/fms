@@ -176,6 +176,7 @@
         <property name="filterChainDefinitions">
             <value>
             	/ == anon
+            	/index = anon
             	/qry/** == anon
             	/view/** == anon
                 /favicon.ico = anon

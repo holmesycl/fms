@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import com.taohj.fms.exception.UserExistException;
 import com.taohj.fms.model.User;
@@ -109,6 +110,28 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
 			}
 		};
 		return selectOne(example);
+	}
+
+	@Override
+	public void updateUserInfo(User user) {
+		Assert.notNull(user);
+		String username = user.getUsername();
+		Assert.hasText(username);
+		User _user = selectByUsername(username);
+		Assert.notNull(_user);
+		if (StringUtils.hasText(user.getPassword())) {
+			UserPwdSalt userPwdSalt = userPwdSaltService.selectByUsername(username);
+			_user.setPassword(PwdUtil.sha256Hash(user.getPassword(), userPwdSalt.getSalt()));
+		}
+		if (StringUtils.hasText(user.getEmail())) {
+			_user.setEmail(user.getEmail());
+		}
+		if (StringUtils.hasText(user.getCellphoneNumber())) {
+			_user.setCellphoneNumber(user.getCellphoneNumber());
+		}
+		_user.setLastModifyDate(new Date());
+		updateNotNull(_user);
+
 	}
 
 }
