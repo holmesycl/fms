@@ -34,6 +34,15 @@ public abstract class TimeUtil {
 			return calendar.getTime();
 		}
 	}
+	
+	/**
+	 * 
+	 * @param days
+	 * @return
+	 */
+	public static DateContainer date(Date date) {
+		return new DateContainer(date);
+	}
 
 	public static Date expireDate() {
 		Calendar calendar = Calendar.getInstance();

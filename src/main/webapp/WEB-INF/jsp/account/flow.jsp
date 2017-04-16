@@ -27,35 +27,34 @@
   <body>
 	
 	<div class="container" style="margin-top: 20px;">
-		
-		<ol class="breadcrumb">
-		  <li class="active">我的产品</li>
-		</ol>
-	
-		<table class="table table-hover table-striped">
+		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>理财产品</th>
-					<th>总金额（元）</th>
-					<th>昨日收益（元）</th>
-					<th>总收益（元）</th>
-					<th></th>
+					<th>交易类型</th>
+					<th>交易金额（元）</th>
+					<th>交易渠道</th>
+					<th>交易时间</th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach var="row" items="${uesrProducts.rows }" varStatus="status">
-					<tr>
-						<td>${row.productName }</td>
-					  	<td><fmt:formatNumber value="${row.amount / 100 }" pattern="#,##0.00#"/></td>
-					  	<td><fmt:formatNumber value="${row.yesterdayIncome / 100 }" pattern="#,##0.00#"/></td>
-					  	<td><fmt:formatNumber value="${row.income / 100 }" pattern="#,##0.00#"/></td>
-					  	<td><a class="btn btn-default" href="${pageContext.request.contextPath}/personal/product/${row.userProductId }">详情</a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
+		<c:forEach var="flow" items="${flows }">
+			<tr>
+				<td>
+					<c:choose>
+						<c:when test="${flow.flowType == 1}">
+							收入
+						</c:when>
+						<c:when test="${flow.flowType == 2}">
+							支出
+						</c:when>
+					</c:choose>
+				</td>
+				<td><fmt:formatNumber value="${flow.amount / 100 }" pattern="#,#00.00#"/></td>
+				<td>${flow.channel }</td>
+				<td><fmt:formatDate value="${flow.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+			</tr>		
+		</c:forEach>
 		</table>
 	</div>
-	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -27,6 +27,13 @@
   <body>
 	
 	<div class="container" style="margin-top: 20px;">
+	
+		<ol class="breadcrumb">
+		  <li><a href="${pageContext.request.contextPath}/personal/product/list">我的产品</a></li>
+		  <li><a href="#" onclick="history.back();">产品详情</a></li>
+		  <li class="active">收益详情</li>
+		</ol>	
+		
 		<c:choose>
 			<c:when test="${incomeDetails.size() == 0 }">
 				<p>暂无收益.</p>
@@ -53,7 +60,7 @@
 								<td><fmt:formatDate value="${row.createDate }" pattern="yyyy-MM-dd" /></td>
 							  	<td>${row.typeName }</td>
 							  	<td>
-							  		<fmt:formatNumber value="${row.amount / 100 }" pattern="#,#00.00#"/>
+							  		<fmt:formatNumber value="${row.amount / 100 }" pattern="#,##0.00#"/>
 							  	</td>
 							</tr>
 						</c:forEach>

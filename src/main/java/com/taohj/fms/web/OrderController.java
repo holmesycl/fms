@@ -20,12 +20,12 @@ public class OrderController {
 	@RequestMapping("/purchase")
 	public String purchaseProduct(int productId, long purchaseAmount) {
 		long orderNunber = orderService.purchaseProduct(SecurityUtils.getSubject().getPrincipal().toString(), productId, purchaseAmount);
-		return "redirect:/order/show/" + orderNunber;
+		return "redirect:/order/show/purchase/" + orderNunber;
 	}
 
-	@RequestMapping("/show/{orderNumber}")
-	public ModelAndView showOrder(@PathVariable long orderNumber) {
-		ModelAndView model = new ModelAndView("order/view");
+	@RequestMapping("/show/{type}/{orderNumber}")
+	public ModelAndView showOrder(@PathVariable String type, @PathVariable long orderNumber) {
+		ModelAndView model = new ModelAndView("order/" + type + "Order");
 		OrderModel order = orderService.selectOrderModelByOrderNumber(orderNumber);
 		model.addObject("order", order);
 		return model;
@@ -35,7 +35,7 @@ public class OrderController {
 	public String pedeemProduct(@PathVariable int productId, long userProductId, long amount) {
 		String username = (String) SecurityUtils.getSubject().getPrincipal();
 		long orderNumber = orderService.pedeemProduct(username, productId, userProductId, amount * 100);
-		return "redirect:/order/show/" + orderNumber;
+		return "redirect:/order/show/pedeem/" + orderNumber;
 	}
 
 }

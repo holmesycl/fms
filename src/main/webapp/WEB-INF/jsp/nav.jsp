@@ -10,23 +10,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/index">
-        <img alt="首页" src="${pageContext.request.contextPath}/static/img/logo.png">
-      </a>
     </div>
      <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="${pageContext.request.contextPath}/index"><span style="color:#ff721f;">首页</span> <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="${pageContext.request.contextPath}/index"><span style="color:#ff721f;"><span class="glyphicon glyphicon-home" aria-hidden="true">首页</span></span> <span class="sr-only">(current)</span></a></li>
        <!--  <li><a href="#">Link</a></li> -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
       	<shiro:authenticated>
       		<li class="dropdown">
-	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><shiro:principal/><span class="caret"></span></a>
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"><shiro:principal/></span><span class="caret"></span></a>
 	          <ul class="dropdown-menu">
-	          	 <li><a href="${pageContext.request.contextPath}/home">我的理财</a></li>
-	             <li><a href="${pageContext.request.contextPath}/s/logout">退出登录</a></li>
+	          	 <li><a href="${pageContext.request.contextPath}/home"><span class="glyphicon glyphicon-piggy-bank" aria-hidden="true">我的理财</span></a></li>
+	             <li><a href="${pageContext.request.contextPath}/s/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true">退出登录</span></a></li>
 	          </ul>
 	        </li>
       	</shiro:authenticated>

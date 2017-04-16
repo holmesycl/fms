@@ -22,65 +22,46 @@
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/bootstrap/easyui.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/icon.css">
-
+	<style type="text/css">
+	p{
+		height: 40px;
+		font-size: 15px;
+		line-height: 40px;
+	}
+	
+	p label{
+		margin-left: 5px;
+		width: 100px;
+	}
+	
+	</style>
   </head>
   <body>
 	
-	<jsp:include page="../nav.jsp"/>
+	<div class="container" style="margin-top: 20px;">
 	
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
-				<div class="row">
-					<div class="col-md-2"><label>订单编号</label></div>		
-					<div>
-						<p>${order.orderNumber }</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>创建时间</label></div>		
-					<div>
-						<p><fmt:formatDate value="${order.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>用户操作</label></div>		
-					<div>
-						<p>${order.businessName }</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>产品名称</label></div>		
-					<div>
-						<p>${order.productName }</p>
-					</div>
-				</div> 	
-				<div class="row">
-					<div class="col-md-2"><label>产品金额</label></div>		
-					<div>
-						<p>${order.amount / 100 } 元</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>生效时间</label></div>		
-					<div>
-						<p><fmt:formatDate value="${order.effectiveDate }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>失效时间</label></div>		
-					<div>
-						<p><fmt:formatDate value="${order.expireDate }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-2"><label>状态</label></div>		
-					<div>
-						<p>成功</p>
-					</div>
-				</div>
-			</div>
-		</div>
+		<ol class="breadcrumb">
+		  <li><a href="${pageContext.request.contextPath}/personal/product/list">我的产品</a></li>
+		  <li><a href="#" onclick="history.back();">产品赎回</a></li>
+		  <li class="active">订单详情</li>
+		</ol>	
+		
+		<h3>赎回订单详情</h3>
+		<hr>
+		
+		<p class="bg-warning"><label>用户操作</label>${order.businessName }</p>
+		<p class="bg-warning"><label>赎回状态</label>成功</p>
+		
+		<p class="bg-info"><label>订单编号</label> ${order.orderNumber }</p>
+		
+		<p class="bg-info"><label>赎回时间</label> <fmt:formatDate value="${order.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+
+		<p class="bg-info"><label>操作人员</label><shiro:principal/></p>
+		
+		<p class="bg-info"><label>赎回金额</label> <fmt:formatNumber value="${order.amount / 100 }" pattern="#,##0.00#"/>元</p>
+		
+		<p class="bg-info"><label>产品名称</label>${order.productName }</p>
+		
 	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>

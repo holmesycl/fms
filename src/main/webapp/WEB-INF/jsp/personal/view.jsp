@@ -32,7 +32,12 @@
   </head>
   <body>
 	
-	<div class="container">
+	<div class="container" style="margin-top: 20px;">
+	
+		<ol class="breadcrumb">
+		  <li><a href="#" onclick="history.back();">我的产品</a></li>
+		  <li class="active">产品详情</li>
+		</ol>
 		
 	    <h3>${userProduct.productName }</h3>
 	  	<hr>
@@ -50,7 +55,7 @@
 	  		</div>
 	  		<div class="col-md-9">
 	  			<p class="item">
-	  				<fmt:formatNumber value="${userProduct.amount / 100 }" pattern="#,#00.00#"/>
+	  				<fmt:formatNumber value="${userProduct.amount / 100 }" pattern="#,##0.00#"/>
 	  			</p>
 	  		</div>
 	  	</div>
@@ -84,7 +89,7 @@
 	  		</div>
 	  		<div class="col-md-9">
 	  			<p class="item">
-	  				<fmt:formatNumber value="${userProduct.income / 100 }" pattern="#,#00.00#"/>
+	  				<fmt:formatNumber value="${userProduct.income / 100 }" pattern="#,##0.00#"/>
 	  				<a class="btn btn-warning" style="margin-left: 20px;" href="${pageContext.request.contextPath}/income/detail/${userProduct.productId }">收益详情</a>
 	  			</p>
 	  		</div>

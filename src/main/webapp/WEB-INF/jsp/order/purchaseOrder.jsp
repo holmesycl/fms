@@ -22,40 +22,51 @@
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/bootstrap/easyui.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/icon.css">
-
+	<style type="text/css">
+	p{
+		height: 40px;
+		font-size: 15px;
+		line-height: 40px;
+	}
+	
+	p label{
+		margin-left: 5px;
+		width: 100px;
+	}
+	
+	</style>
   </head>
   <body>
 	
-	<div class="container" style="margin-top: 20px;">
-		
+	<jsp:include page="../nav.jsp"/>
+	
+	<div class="container">
+	
 		<ol class="breadcrumb">
-		  <li class="active">我的产品</li>
+		  <li><a href="${pageContext.request.contextPath}/index">首页</a></li>
+		  <li><a href="#" onclick="history.back();">购买理财产品</a></li>
+		  <li class="active">订单详情</li>
 		</ol>
-	
-		<table class="table table-hover table-striped">
-			<thead>
-				<tr>
-					<th>理财产品</th>
-					<th>总金额（元）</th>
-					<th>昨日收益（元）</th>
-					<th>总收益（元）</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="row" items="${uesrProducts.rows }" varStatus="status">
-					<tr>
-						<td>${row.productName }</td>
-					  	<td><fmt:formatNumber value="${row.amount / 100 }" pattern="#,##0.00#"/></td>
-					  	<td><fmt:formatNumber value="${row.yesterdayIncome / 100 }" pattern="#,##0.00#"/></td>
-					  	<td><fmt:formatNumber value="${row.income / 100 }" pattern="#,##0.00#"/></td>
-					  	<td><a class="btn btn-default" href="${pageContext.request.contextPath}/personal/product/${row.userProductId }">详情</a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		
+		<h3>订购订单详情</h3>
+		<hr>
+		
+		<p class="bg-success"><label>用户操作</label>${order.businessName }</p>
+		<p class="bg-success"><label>购买状态</label>成功</p>
+		
+		<p class="bg-info"><label>订单编号</label> ${order.orderNumber }</p>
+		
+		<p class="bg-info"><label>购买时间</label> <fmt:formatDate value="${order.createDate }" pattern="yyyy-MM-dd HH:mm:ss"/></p>
+
+		<p class="bg-info"><label>操作人员</label><shiro:principal/></p>
+		
+		<p class="bg-info"><label>购买金额</label> <fmt:formatNumber value="${order.amount / 100 }" pattern="#,##0.00#"/>元</p>
+		
+		<p class="bg-info"><label>产品名称</label>${order.productName }</p>
+		
+		<p class="bg-info"><label>收益开始时间</label><fmt:formatDate value="${order.effectiveDate }" pattern="yyyy-MM-dd"/></p>
+		
 	</div>
-	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

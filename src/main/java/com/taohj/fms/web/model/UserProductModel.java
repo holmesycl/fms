@@ -74,6 +74,8 @@ public class UserProductModel {
 	 * 收益
 	 */
 	private Long income;
+	
+	private Long yesterdayIncome;
 
 	/**
 	 * 获取主键
@@ -343,5 +345,15 @@ public class UserProductModel {
 	public void setCanPedeem(String canPedeem) {
 		this.canPedeem = canPedeem;
 	}
+
+	public Long getYesterdayIncome() {
+		return yesterdayIncome;
+	}
+
+	public void setYesterdayIncome(Long yesterdayIncome) {
+		this.yesterdayIncome = yesterdayIncome;
+	}
+	
+	
 
 }

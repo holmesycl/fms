@@ -23,7 +23,6 @@ import com.taohj.fms.util.EffectiveExample;
 import com.taohj.fms.util.State;
 import com.taohj.fms.util.TimeUtil;
 import com.taohj.fms.web.PageResult;
-import com.taohj.fms.web.model.IncomeDetailModel;
 import com.taohj.fms.web.model.UserProductModel;
 
 import tk.mybatis.mapper.entity.Example;
@@ -42,7 +41,7 @@ public class UserProductServiceImpl extends BaseService<UserProduct> implements 
 	public PageResult<UserProductModel> findProduct(String username, int page, int rows) {
 		Example example = new Example(UserProduct.class);
 		example.createCriteria().andEqualTo("username", username).andEqualTo("state", State.U.name());
-
+		example.setOrderByClause("create_date desc");
 		PageHelper.startPage(page, rows);
 		Page<UserProduct> userProducts = (Page<UserProduct>) selectByExample(example);
 
@@ -56,6 +55,13 @@ public class UserProductServiceImpl extends BaseService<UserProduct> implements 
 					int productId = userProduct.getProductId();
 					FinancialProduct product = financialProductService.selectByKey(productId);
 					model.setProductName(product.getProductName());
+					
+					Long income = incomeDetailService.findIncomeByUsernameAndProduct(username, productId);
+					model.setIncome(income);
+					
+					Long yesterdayIncome = incomeDetailService.findYesterdayIncomeByUsernameAndProduct(username, productId);
+					model.setYesterdayIncome(yesterdayIncome);
+					
 					vals.add(model);
 				} catch (IllegalAccessException e) {
 					throw new RuntimeException(e);
@@ -77,14 +83,10 @@ public class UserProductServiceImpl extends BaseService<UserProduct> implements 
 		try {
 			BeanUtils.copyProperties(model, userProduct);
 			int productId = userProduct.getProductId();
-			List<IncomeDetailModel> incomeDetails = incomeDetailService.findIncomeDetailByUsernameAndProduct(username, productId);
-			long income = 0L;
-			if (!CollectionUtils.isEmpty(incomeDetails)) {
-				for (IncomeDetailModel incomeDetailModel : incomeDetails) {
-					income += incomeDetailModel.getAmount();
-				}
-			}
+			
+			Long income = incomeDetailService.findIncomeByUsernameAndProduct(username, productId);
 			model.setIncome(income);
+			
 			FinancialProduct product = financialProductService.selectByKey(productId);
 			model.setProductName(product.getProductName());
 			model.setTermType(product.getTermType());

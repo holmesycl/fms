@@ -22,40 +22,27 @@
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/bootstrap/easyui.css">
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/jquery-easyui/1.5.1/themes/icon.css">
-
+	<style type="text/css">
+		label.account{
+			width: 150px;
+			line-height: 50px;
+		}
+	
+	</style>
   </head>
   <body>
-	
-	<div class="container" style="margin-top: 20px;">
+	<div class="container">
+		<h3><span class="glyphicon glyphicon-user" aria-hidden="true"> </span>账户信息</h3>
+		<hr>
 		
-		<ol class="breadcrumb">
-		  <li class="active">我的产品</li>
-		</ol>
-	
-		<table class="table table-hover table-striped">
-			<thead>
-				<tr>
-					<th>理财产品</th>
-					<th>总金额（元）</th>
-					<th>昨日收益（元）</th>
-					<th>总收益（元）</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="row" items="${uesrProducts.rows }" varStatus="status">
-					<tr>
-						<td>${row.productName }</td>
-					  	<td><fmt:formatNumber value="${row.amount / 100 }" pattern="#,##0.00#"/></td>
-					  	<td><fmt:formatNumber value="${row.yesterdayIncome / 100 }" pattern="#,##0.00#"/></td>
-					  	<td><fmt:formatNumber value="${row.income / 100 }" pattern="#,##0.00#"/></td>
-					  	<td><a class="btn btn-default" href="${pageContext.request.contextPath}/personal/product/${row.userProductId }">详情</a></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+		<p><label class="account">账户ID</label><span>${account.accountId }</span></p>
+		
+		<p><label class="account">开户人员</label><span><shiro:principal/> </span></p>
+		
+		<p><label class="account">开户时间</label><span><fmt:formatDate value="${account.createDate }" pattern="yyyy-MM-dd"/></span></p>
+		
+		<p><label class="account">账户金额</label><span><fmt:formatNumber value="${account.amount / 100 }" pattern="#,#00.00#"/>元</span></p>
 	</div>
-	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="${pageContext.request.contextPath}/static/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
